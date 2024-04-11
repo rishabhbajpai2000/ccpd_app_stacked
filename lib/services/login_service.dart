@@ -15,7 +15,10 @@ class LoginService {
   }
 
   Future<AuthResponse> signUpNewUser(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String firstName,
+      required String lastName}) async {
     try {
       final AuthResponse res = await supabase.auth.signUp(
         email: email,
@@ -26,7 +29,9 @@ class LoginService {
       );
       Fluttertoast.showToast(
           msg: "Account created Successfully", fontSize: 16.0);
-      // _navigationService.navigateToRegistrationDetailsView();
+
+      // TODO: at this moment we will get the userId, and send it to the server along with the first name and last name
+      _navigationService.navigateToHomeView();
       return res;
     } catch (e) {
       Fluttertoast.showToast(msg: "$e", fontSize: 16.0);
@@ -45,7 +50,7 @@ class LoginService {
       final AuthResponse response = await supabase.auth
           .signInWithPassword(email: email, password: password);
       Fluttertoast.showToast(msg: "Logged in Successfully", fontSize: 16.0);
-      // _navigationService.navigateToStartupView();
+      _navigationService.navigateToStartupView();
     } catch (e) {
       Fluttertoast.showToast(msg: "$e", fontSize: 16.0);
       logger.e(e);

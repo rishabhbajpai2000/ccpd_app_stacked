@@ -28,10 +28,10 @@ class HomeView extends StackedView<HomeViewModel> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        viewModel.navigateToScreen();
+                        viewModel.logOut();
                       },
                       child: const Text(
-                        'Hello, STACKED!',
+                        'Logout!',
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.w900,

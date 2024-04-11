@@ -1,4 +1,6 @@
+import 'package:ccpd_app_stacked/app/app.locator.dart';
 import 'package:ccpd_app_stacked/app/app.logger.dart';
+import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.form.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -8,11 +10,17 @@ class SignUpViewModel extends FormViewModel {
   final formKey = GlobalKey<FormState>();
   final _logger = getLogger('SignUpViewModel');
   final _navigationService = NavigationService();
+  final _loginService = locator<LoginService>();
 
   void saveData() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      
+      _loginService.signUpNewUser(
+        email: emailValue!,
+        password: passwordValue!,
+        firstName: firstNameValue!,
+        lastName: lastNameValue!,
+      );
     }
   }
 
