@@ -8,6 +8,7 @@ class LoginService {
   final supabase = Supabase.instance.client;
   final logger = getLogger('LoginService');
   final _navigationService = NavigationService();
+  
   Future<bool> isLoggedIn() async {
     final User? user = supabase.auth.currentUser;
     logger.i('User: $user');
