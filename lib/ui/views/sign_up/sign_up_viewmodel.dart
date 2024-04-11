@@ -8,7 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class SignUpViewModel extends FormViewModel {
   final formKey = GlobalKey<FormState>();
-  final _logger = getLogger('SignUpViewModel');
+
   final _navigationService = NavigationService();
   final _loginService = locator<LoginService>();
 
