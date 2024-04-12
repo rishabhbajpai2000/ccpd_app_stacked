@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/AssetLinks.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +36,11 @@ class InitialWelcomeScreenView
                       fontSize: 16,
                     ),
                   ),
-                  Image.asset("assets/images/ABESLogo.png")
+                  Image.network(ABESLogoURL)
                 ],
               ),
               const SizedBox(height: 40),
-              Image.asset("assets/images/InitialWelcomeCenterImage.png"),
+              Image.network(InitialWelcomeScreenCenterImage),
               const SizedBox(height: 40),
               const Text("We are what we do",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

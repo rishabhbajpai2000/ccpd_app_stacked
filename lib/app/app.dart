@@ -8,6 +8,9 @@ import 'package:ccpd_app_stacked/ui/views/initial_welcome_screen/initial_welcome
 import 'package:ccpd_app_stacked/ui/views/login/login_view.dart';
 import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
+import 'package:ccpd_app_stacked/ui/views/dashboard/dashboard_view.dart';
+import 'package:ccpd_app_stacked/ui/views/profile/profile_view.dart';
+import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +21,9 @@ import 'package:ccpd_app_stacked/services/login_service.dart';
     MaterialRoute(page: InitialWelcomeScreenView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: SignUpView),
+    MaterialRoute(page: DashboardView),
+    MaterialRoute(page: ProfileView),
+    MaterialRoute(page: JobPostingView),
 // @stacked-route
   ],
   dependencies: [

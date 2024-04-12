@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/AssetLinks.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/InputTextField.dart';
@@ -46,7 +47,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                         size: 30,
                       ),
                     ),
-                    Image.asset("assets/images/ABESLogo.png"),
+                    Image.network(ABESLogoURL)
                   ],
                 ),
                 const SizedBox(height: 40),
@@ -132,7 +133,6 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
       LoginViewModel();
   @override
   void onViewModelReady(LoginViewModel viewModel) {
-
     syncFormWithViewModel(viewModel);
   }
 }
