@@ -20,10 +20,8 @@ class HomeView extends StackedView<HomeViewModel> {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         backgroundColor: Color(0xff8E97FD),
+        foregroundColor: Colors.white,
         onPressed: () {
-          // setState(() {
-          //   _bottomNavIndex = 2;
-          // });
           viewModel.bottomNavIndex = 2;
           viewModel.rebuildUi();
         },
@@ -43,9 +41,6 @@ class HomeView extends StackedView<HomeViewModel> {
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.softEdge,
         onTap: (index) {
-          //   return setState(() {
-          //   _bottomNavIndex = index;
-          // });
           viewModel.bottomNavIndex = index;
           viewModel.rebuildUi();
         },
