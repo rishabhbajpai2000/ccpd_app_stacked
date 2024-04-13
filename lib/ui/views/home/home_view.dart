@@ -2,7 +2,6 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 
 import 'home_viewmodel.dart';
 
@@ -19,7 +18,7 @@ class HomeView extends StackedView<HomeViewModel> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        backgroundColor: Color(0xff8E97FD),
+        backgroundColor: const Color(0xff8E97FD),
         foregroundColor: Colors.white,
         onPressed: () {
           viewModel.bottomNavIndex = 2;
@@ -31,8 +30,8 @@ class HomeView extends StackedView<HomeViewModel> {
       bottomNavigationBar: AnimatedBottomNavigationBar(
         height: 70,
         notchMargin: 10,
-        splashColor: Color(0xff8E97FD),
-        activeColor: Color(0xff8E97FD),
+        splashColor: const Color(0xff8E97FD),
+        activeColor: const Color(0xff8E97FD),
         icons: viewModel.iconList,
         iconSize: 30,
         elevation: 0,

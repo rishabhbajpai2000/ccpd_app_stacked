@@ -14,7 +14,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dashboard"),
+        title: const Text("Dashboard"),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(

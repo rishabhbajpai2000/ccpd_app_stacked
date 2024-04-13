@@ -1,9 +1,7 @@
-import 'package:ccpd_app_stacked/links/AssetLinks.dart';
-import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
+import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/InputTextField.dart';
 import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ccpd_app_stacked/links/AssetLinks.dart';
+import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';

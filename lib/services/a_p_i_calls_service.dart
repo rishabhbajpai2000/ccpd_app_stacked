@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ccpd_app_stacked/app/app.logger.dart';
-import 'package:ccpd_app_stacked/links/APIs.dart';
+import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:file_picker/file_picker.dart';
 import "package:http/http.dart" as http;
@@ -38,7 +38,7 @@ class APICallsService {
     };
     String data = jsonEncode(body);
 
-    final response = await http.post(Uri.parse(JobPostingAPILink),
+    final response = await http.post(Uri.parse(jobPostingAPILink),
         headers: headers, body: data);
 
     int statusCode = response.statusCode;
@@ -60,11 +60,11 @@ class APICallsService {
       "email": email
     };
     String data = jsonEncode(body);
-    final response = await http.post(Uri.parse(RegisterCCPDUserAPILink),
+    final response = await http.post(Uri.parse(registerCCPDUserAPILink),
         headers: headers, body: data);
     _logger.i("statusCode: ${response.statusCode}");
-    UtilsService.showRelevantToastMessageForCCPDUserAddingAPI(statusCode: response.statusCode);
-    
+    UtilsService.showRelevantToastMessageForCCPDUserAddingAPI(
+        statusCode: response.statusCode);
   }
 
   Future<String> getTheJDLink({PlatformFile? file}) async {

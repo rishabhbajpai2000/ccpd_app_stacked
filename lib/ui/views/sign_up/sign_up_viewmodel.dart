@@ -1,5 +1,4 @@
 import 'package:ccpd_app_stacked/app/app.locator.dart';
-import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.form.dart';
 import 'package:flutter/material.dart';

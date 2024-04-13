@@ -1,9 +1,7 @@
-import 'package:ccpd_app_stacked/links/AssetLinks.dart';
+import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/FormField.dart';
 import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.form.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -166,8 +164,8 @@ class JobPostingView extends StackedView<JobPostingViewModel>
                       ),
                       child: Center(
                         child: viewModel.loading == true
-                            ? CircularProgressIndicator()
-                            : Text(
+                            ? const CircularProgressIndicator()
+                            : const Text(
                                 'Save',
                                 style: TextStyle(
                                   color: Colors.white,

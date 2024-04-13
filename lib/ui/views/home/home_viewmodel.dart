@@ -14,9 +14,9 @@ class HomeViewModel extends BaseViewModel {
   ];
 
   List<Widget> pagesList = <Widget>[
-    DashboardView(),
-    ProfileView(),
-    JobPostingView(),
+    const DashboardView(),
+    const ProfileView(),
+    const JobPostingView(),
   ];
 
   void logOut() {

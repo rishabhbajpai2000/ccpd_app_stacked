@@ -1,8 +1,8 @@
-import 'package:ccpd_app_stacked/links/AssetLinks.dart';
+import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:stacked/stacked.dart';
 
 import 'initial_welcome_screen_viewmodel.dart';
@@ -40,7 +40,7 @@ class InitialWelcomeScreenView
                 ],
               ),
               const SizedBox(height: 40),
-              Image.network(InitialWelcomeScreenCenterImage),
+              Image.network(initialWelcomeScreenCenterImage),
               const SizedBox(height: 40),
               const Text("We are what we do",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

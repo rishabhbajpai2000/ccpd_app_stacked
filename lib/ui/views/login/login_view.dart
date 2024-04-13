@@ -1,4 +1,4 @@
-import 'package:ccpd_app_stacked/links/AssetLinks.dart';
+import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/InputTextField.dart';
