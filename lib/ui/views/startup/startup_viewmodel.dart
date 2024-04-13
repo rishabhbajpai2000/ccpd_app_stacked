@@ -11,7 +11,7 @@ class StartupViewModel extends BaseViewModel {
   final _logger = getLogger("StartupViewModel");
 
   Future runStartupLogic() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
     bool hasLoggedInUser = await _loginService.isLoggedIn();
     _logger.i("hasLoggedInUser: $hasLoggedInUser");
     hasLoggedInUser
