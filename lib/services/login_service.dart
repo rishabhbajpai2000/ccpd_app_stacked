@@ -1,5 +1,6 @@
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/app/app.router.dart';
+import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -31,7 +32,13 @@ class LoginService {
       Fluttertoast.showToast(
           msg: "Account created Successfully", fontSize: 16.0);
 
-      // TODO: at this moment we will get the userId, and send it to the server along with the first name and last name
+      final userId = res.user?.id;
+      logger.i('userId: $userId');
+      await APICallsService.registerNewUser(
+          firstName: firstName,
+          lastName: lastName,
+          userId: userId!,
+          email: email);
       _navigationService.navigateToHomeView();
       return res;
     } catch (e) {

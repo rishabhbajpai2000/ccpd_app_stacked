@@ -11,17 +11,22 @@ class SignUpViewModel extends FormViewModel {
 
   final _navigationService = NavigationService();
   final _loginService = locator<LoginService>();
+  bool processing = false;
+  Future<void> saveData() async {
+    processing = true;
+    rebuildUi();
 
-  void saveData() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      _loginService.signUpNewUser(
+      await _loginService.signUpNewUser(
         email: emailValue!,
         password: passwordValue!,
         firstName: firstNameValue!,
         lastName: lastNameValue!,
       );
     }
+    processing = false;
+    rebuildUi();
   }
 
   void navigateBack() {

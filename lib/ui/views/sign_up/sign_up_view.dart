@@ -29,9 +29,9 @@ class SignUpView extends StackedView<SignUpViewModel> with $SignUpView {
     SignUpViewModel viewModel,
     Widget? child,
   ) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: viewModel.formKey,
@@ -85,11 +85,27 @@ class SignUpView extends StackedView<SignUpViewModel> with $SignUpView {
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
-                CircularButton(
-                    text: "Get Started",
-                    onPressed: () {
-                      viewModel.saveData();
-                    }),
+                GestureDetector(
+                  onTap: () async {
+                    await viewModel.saveData();
+                  },
+                  child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: const Color(0xff8e97fd),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: viewModel.processing
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text("Get Started",
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white)),
+                      )),
+                ),
               ],
             ),
           ),

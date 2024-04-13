@@ -10,15 +10,21 @@ class LoginViewModel extends FormViewModel {
   final formKey = GlobalKey<FormState>();
   final _navigationService = NavigationService();
   final _loginService = LoginService();
+  bool processing = false;
   void navigateBack() {
     _navigationService.back();
   }
 
-  void saveData() {
+  Future<void> saveData() async {
+    processing = true;
+    rebuildUi();
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      _loginService.signInWithEmail(email: emailValue, password: passwordValue);
+      await _loginService.signInWithEmail(
+          email: emailValue, password: passwordValue);
     }
+    processing = false;
+    rebuildUi();
   }
 
   void navigateToSignUp() {

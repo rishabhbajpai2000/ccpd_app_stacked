@@ -19,6 +19,16 @@ class ProfileView extends StackedView<ProfileViewModel> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        child: Center(
+          child: GestureDetector(
+              onTap: () {
+                viewModel.logOut();
+              },
+              child: Text(
+                "LogOut",
+                style: TextStyle(fontSize: 50),
+              )),
+        ),
       ),
     );
   }
