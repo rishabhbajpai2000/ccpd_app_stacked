@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.form.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,10 @@ import 'package:stacked/stacked.dart';
 import 'package:intl/intl.dart';
 
 class JobPostingViewModel extends FormViewModel {
+  final formKey = GlobalKey<FormState>();
   bool documentSelected = false;
   PlatformFile? pickedFile;
+  bool loading = false;
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(
@@ -29,6 +32,36 @@ class JobPostingViewModel extends FormViewModel {
     if (pickedDate != null) {
       registrationEndDateValue = DateFormat('dd/MM/yyyy').format(pickedDate);
     }
+  }
+
+  void saveJobPosting() async {
+    loading = true;
+    rebuildUi();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      await APICallsService.postTheJob(
+          companyName: companyNameValue!,
+          jobProfile: jobProfileValue!,
+          jobDescription: jobDescriptionValue!,
+          expectedCTC: expectedCTCValue!,
+          registrationLink: registrationLinkValue!,
+          jDLink: 'www.google.com',
+          registrationEndDate: registrationEndDateValue!);
+    }
+    loading = false;
+    rebuildUi();
+  }
+
+  void discardJobPosting() {
+    companyNameValue = '';
+    jobProfileValue = '';
+    jobDescriptionValue = '';
+    expectedCTCValue = '';
+    registrationEndDateValue = '';
+    registrationLinkValue = '';
+    documentSelected = false;
+    pickedFile = null;
+    rebuildUi();
   }
 }
 

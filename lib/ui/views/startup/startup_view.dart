@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/links/AssetLinks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
@@ -14,36 +15,47 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
-      backgroundColor: Color(0xff8e97fd),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'CCPD Application',
-              style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Loading ...',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
-                horizontalSpaceSmall,
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 6,
-                  ),
-                )
-              ],
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: const Color(0xff8e97fd),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Stack(
+            children: [
+              Positioned(top: 0, right: 0, child: Image.network(ABESLogoURL)),
+              const Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'C a m p u s E a s e',
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xff565fc6)),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Simplifying Campus Placements',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ],
+                    ),
+                    verticalSpaceSmall,
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(
+                        Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

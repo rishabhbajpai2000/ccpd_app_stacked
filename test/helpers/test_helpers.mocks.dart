@@ -6,7 +6,9 @@
 import 'dart:async' as _i7;
 import 'dart:ui' as _i8;
 
+import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i10;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i9;
+import 'package:ccpd_app_stacked/services/utils_service.dart' as _i11;
 import 'package:flutter/material.dart' as _i6;
 import 'package:logger/src/logger.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -841,3 +843,39 @@ class MockLoginService extends _i1.Mock implements _i9.LoginService {
         )),
       ) as _i7.Future<_i2.AuthResponse>);
 }
+
+/// A class which mocks [APICallsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
+  @override
+  _i7.Future<String> getTheJDLink({dynamic file}) => (super.noSuchMethod(
+        Invocation.method(
+          #getTheJDLink,
+          [],
+          {#file: file},
+        ),
+        returnValue: _i7.Future<String>.value(_i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getTheJDLink,
+            [],
+            {#file: file},
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<String>.value(_i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getTheJDLink,
+            [],
+            {#file: file},
+          ),
+        )),
+      ) as _i7.Future<String>);
+}
+
+/// A class which mocks [UtilsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUtilsService extends _i1.Mock implements _i11.UtilsService {}

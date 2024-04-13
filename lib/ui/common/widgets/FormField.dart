@@ -9,17 +9,17 @@ Widget formField(
     Text(
       Heading,
     ),
-    SizedBox(
+    const SizedBox(
       height: 5,
     ),
     TextFormField(
-      validator: formValidator,
+        validator: formValidator,
         controller: controller,
-        decoration: InputDecoration(),
+        decoration: const InputDecoration(),
         keyboardType: numericalKeyboard == true
             ? TextInputType.number
             : TextInputType.text),
-    SizedBox(
+    const SizedBox(
       height: 20,
     )
   ]);

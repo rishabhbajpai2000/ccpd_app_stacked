@@ -3,6 +3,8 @@ import 'package:mockito/mockito.dart';
 import 'package:ccpd_app_stacked/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
+import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
+import 'package:ccpd_app_stacked/services/utils_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -12,6 +14,8 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<LoginService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<APICallsService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<UtilsService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -19,6 +23,8 @@ void registerServices() {
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
   getAndRegisterLoginService();
+  getAndRegisterAPICallsService();
+  getAndRegisterUtilsService();
 // @stacked-mock-register
 }
 
@@ -76,6 +82,20 @@ MockLoginService getAndRegisterLoginService() {
   _removeRegistrationIfExists<LoginService>();
   final service = MockLoginService();
   locator.registerSingleton<LoginService>(service);
+  return service;
+}
+
+MockAPICallsService getAndRegisterAPICallsService() {
+  _removeRegistrationIfExists<APICallsService>();
+  final service = MockAPICallsService();
+  locator.registerSingleton<APICallsService>(service);
+  return service;
+}
+
+MockUtilsService getAndRegisterUtilsService() {
+  _removeRegistrationIfExists<UtilsService>();
+  final service = MockUtilsService();
+  locator.registerSingleton<UtilsService>(service);
   return service;
 }
 // @stacked-mock-create

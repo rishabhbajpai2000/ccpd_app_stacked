@@ -1,4 +1,4 @@
-import 'package:ccpd_app_stacked/AssetLinks.dart';
+import 'package:ccpd_app_stacked/links/AssetLinks.dart';
 import 'package:ccpd_app_stacked/ui/common/widgets/CircularButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

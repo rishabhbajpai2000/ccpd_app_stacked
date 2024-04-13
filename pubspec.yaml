@@ -17,6 +17,7 @@ dependencies:
   file_picker: ^8.0.0+1
   intl_phone_field2: ^3.3.4
   intl: ^0.19.0
+  http: ^1.2.1
 
 dev_dependencies:
   build_runner: ^2.4.5
