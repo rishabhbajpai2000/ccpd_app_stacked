@@ -55,8 +55,9 @@ class LoginService {
   Future<AuthResponse> signInWithEmail(
       {required email, required password}) async {
     try {
+      await supabase.auth.signInWithPassword(email: email, password: password);
       Fluttertoast.showToast(msg: "Logged in Successfully", fontSize: 16.0);
-      _navigationService.navigateToStartupView();
+      _navigationService.clearStackAndShow(Routes.startupView);
     } catch (e) {
       Fluttertoast.showToast(msg: "$e", fontSize: 16.0);
       logger.e(e);

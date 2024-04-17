@@ -18,6 +18,9 @@ const String JobDescriptionValueKey = 'JobDescription';
 const String ExpectedCTCValueKey = 'ExpectedCTC';
 const String RegistrationEndDateValueKey = 'RegistrationEndDate';
 const String RegistrationLinkValueKey = 'RegistrationLink';
+const String MinimumPercentageValueKey = 'MinimumPercentage';
+const String CompanyWebsiteValueKey = 'CompanyWebsite';
+const String JobLocationValueKey = 'JobLocation';
 
 final Map<String, TextEditingController> _JobPostingViewTextEditingControllers =
     {};
@@ -32,6 +35,9 @@ final Map<String, String? Function(String?)?> _JobPostingViewTextValidations = {
   RegistrationEndDateValueKey:
       JobPostingValidators.registrationEndDateValidator,
   RegistrationLinkValueKey: JobPostingValidators.registrationLinkValidator,
+  MinimumPercentageValueKey: JobPostingValidators.percentageValidator,
+  CompanyWebsiteValueKey: JobPostingValidators.companyWebsiteValidator,
+  JobLocationValueKey: JobPostingValidators.jobLocationValidator,
 };
 
 mixin $JobPostingView {
@@ -47,6 +53,12 @@ mixin $JobPostingView {
       _getFormTextEditingController(RegistrationEndDateValueKey);
   TextEditingController get registrationLinkController =>
       _getFormTextEditingController(RegistrationLinkValueKey);
+  TextEditingController get minimumPercentageController =>
+      _getFormTextEditingController(MinimumPercentageValueKey);
+  TextEditingController get companyWebsiteController =>
+      _getFormTextEditingController(CompanyWebsiteValueKey);
+  TextEditingController get jobLocationController =>
+      _getFormTextEditingController(JobLocationValueKey);
 
   FocusNode get companyNameFocusNode => _getFormFocusNode(CompanyNameValueKey);
   FocusNode get jobProfileFocusNode => _getFormFocusNode(JobProfileValueKey);
@@ -57,6 +69,11 @@ mixin $JobPostingView {
       _getFormFocusNode(RegistrationEndDateValueKey);
   FocusNode get registrationLinkFocusNode =>
       _getFormFocusNode(RegistrationLinkValueKey);
+  FocusNode get minimumPercentageFocusNode =>
+      _getFormFocusNode(MinimumPercentageValueKey);
+  FocusNode get companyWebsiteFocusNode =>
+      _getFormFocusNode(CompanyWebsiteValueKey);
+  FocusNode get jobLocationFocusNode => _getFormFocusNode(JobLocationValueKey);
 
   TextEditingController _getFormTextEditingController(
     String key, {
@@ -88,6 +105,9 @@ mixin $JobPostingView {
     expectedCTCController.addListener(() => _updateFormData(model));
     registrationEndDateController.addListener(() => _updateFormData(model));
     registrationLinkController.addListener(() => _updateFormData(model));
+    minimumPercentageController.addListener(() => _updateFormData(model));
+    companyWebsiteController.addListener(() => _updateFormData(model));
+    jobLocationController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -105,6 +125,9 @@ mixin $JobPostingView {
     expectedCTCController.addListener(() => _updateFormData(model));
     registrationEndDateController.addListener(() => _updateFormData(model));
     registrationLinkController.addListener(() => _updateFormData(model));
+    minimumPercentageController.addListener(() => _updateFormData(model));
+    companyWebsiteController.addListener(() => _updateFormData(model));
+    jobLocationController.addListener(() => _updateFormData(model));
 
     _updateFormData(model, forceValidate: _autoTextFieldValidation);
   }
@@ -120,6 +143,9 @@ mixin $JobPostingView {
           ExpectedCTCValueKey: expectedCTCController.text,
           RegistrationEndDateValueKey: registrationEndDateController.text,
           RegistrationLinkValueKey: registrationLinkController.text,
+          MinimumPercentageValueKey: minimumPercentageController.text,
+          CompanyWebsiteValueKey: companyWebsiteController.text,
+          JobLocationValueKey: jobLocationController.text,
         }),
     );
 
@@ -173,6 +199,12 @@ extension ValueProperties on FormStateHelper {
       this.formValueMap[RegistrationEndDateValueKey] as String?;
   String? get registrationLinkValue =>
       this.formValueMap[RegistrationLinkValueKey] as String?;
+  String? get minimumPercentageValue =>
+      this.formValueMap[MinimumPercentageValueKey] as String?;
+  String? get companyWebsiteValue =>
+      this.formValueMap[CompanyWebsiteValueKey] as String?;
+  String? get jobLocationValue =>
+      this.formValueMap[JobLocationValueKey] as String?;
 
   set companyNameValue(String? value) {
     this.setData(
@@ -245,6 +277,42 @@ extension ValueProperties on FormStateHelper {
     }
   }
 
+  set minimumPercentageValue(String? value) {
+    this.setData(
+      this.formValueMap..addAll({MinimumPercentageValueKey: value}),
+    );
+
+    if (_JobPostingViewTextEditingControllers.containsKey(
+        MinimumPercentageValueKey)) {
+      _JobPostingViewTextEditingControllers[MinimumPercentageValueKey]?.text =
+          value ?? '';
+    }
+  }
+
+  set companyWebsiteValue(String? value) {
+    this.setData(
+      this.formValueMap..addAll({CompanyWebsiteValueKey: value}),
+    );
+
+    if (_JobPostingViewTextEditingControllers.containsKey(
+        CompanyWebsiteValueKey)) {
+      _JobPostingViewTextEditingControllers[CompanyWebsiteValueKey]?.text =
+          value ?? '';
+    }
+  }
+
+  set jobLocationValue(String? value) {
+    this.setData(
+      this.formValueMap..addAll({JobLocationValueKey: value}),
+    );
+
+    if (_JobPostingViewTextEditingControllers.containsKey(
+        JobLocationValueKey)) {
+      _JobPostingViewTextEditingControllers[JobLocationValueKey]?.text =
+          value ?? '';
+    }
+  }
+
   bool get hasCompanyName =>
       this.formValueMap.containsKey(CompanyNameValueKey) &&
       (companyNameValue?.isNotEmpty ?? false);
@@ -263,6 +331,15 @@ extension ValueProperties on FormStateHelper {
   bool get hasRegistrationLink =>
       this.formValueMap.containsKey(RegistrationLinkValueKey) &&
       (registrationLinkValue?.isNotEmpty ?? false);
+  bool get hasMinimumPercentage =>
+      this.formValueMap.containsKey(MinimumPercentageValueKey) &&
+      (minimumPercentageValue?.isNotEmpty ?? false);
+  bool get hasCompanyWebsite =>
+      this.formValueMap.containsKey(CompanyWebsiteValueKey) &&
+      (companyWebsiteValue?.isNotEmpty ?? false);
+  bool get hasJobLocation =>
+      this.formValueMap.containsKey(JobLocationValueKey) &&
+      (jobLocationValue?.isNotEmpty ?? false);
 
   bool get hasCompanyNameValidationMessage =>
       this.fieldsValidationMessages[CompanyNameValueKey]?.isNotEmpty ?? false;
@@ -279,6 +356,14 @@ extension ValueProperties on FormStateHelper {
   bool get hasRegistrationLinkValidationMessage =>
       this.fieldsValidationMessages[RegistrationLinkValueKey]?.isNotEmpty ??
       false;
+  bool get hasMinimumPercentageValidationMessage =>
+      this.fieldsValidationMessages[MinimumPercentageValueKey]?.isNotEmpty ??
+      false;
+  bool get hasCompanyWebsiteValidationMessage =>
+      this.fieldsValidationMessages[CompanyWebsiteValueKey]?.isNotEmpty ??
+      false;
+  bool get hasJobLocationValidationMessage =>
+      this.fieldsValidationMessages[JobLocationValueKey]?.isNotEmpty ?? false;
 
   String? get companyNameValidationMessage =>
       this.fieldsValidationMessages[CompanyNameValueKey];
@@ -292,6 +377,12 @@ extension ValueProperties on FormStateHelper {
       this.fieldsValidationMessages[RegistrationEndDateValueKey];
   String? get registrationLinkValidationMessage =>
       this.fieldsValidationMessages[RegistrationLinkValueKey];
+  String? get minimumPercentageValidationMessage =>
+      this.fieldsValidationMessages[MinimumPercentageValueKey];
+  String? get companyWebsiteValidationMessage =>
+      this.fieldsValidationMessages[CompanyWebsiteValueKey];
+  String? get jobLocationValidationMessage =>
+      this.fieldsValidationMessages[JobLocationValueKey];
 }
 
 extension Methods on FormStateHelper {
@@ -309,6 +400,13 @@ extension Methods on FormStateHelper {
   setRegistrationLinkValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[RegistrationLinkValueKey] =
           validationMessage;
+  setMinimumPercentageValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[MinimumPercentageValueKey] =
+          validationMessage;
+  setCompanyWebsiteValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[CompanyWebsiteValueKey] = validationMessage;
+  setJobLocationValidationMessage(String? validationMessage) =>
+      this.fieldsValidationMessages[JobLocationValueKey] = validationMessage;
 
   /// Clears text input fields on the Form
   void clearForm() {
@@ -318,6 +416,9 @@ extension Methods on FormStateHelper {
     expectedCTCValue = '';
     registrationEndDateValue = '';
     registrationLinkValue = '';
+    minimumPercentageValue = '';
+    companyWebsiteValue = '';
+    jobLocationValue = '';
   }
 
   /// Validates text input fields on the Form
@@ -330,6 +431,10 @@ extension Methods on FormStateHelper {
       RegistrationEndDateValueKey:
           getValidationMessage(RegistrationEndDateValueKey),
       RegistrationLinkValueKey: getValidationMessage(RegistrationLinkValueKey),
+      MinimumPercentageValueKey:
+          getValidationMessage(MinimumPercentageValueKey),
+      CompanyWebsiteValueKey: getValidationMessage(CompanyWebsiteValueKey),
+      JobLocationValueKey: getValidationMessage(JobLocationValueKey),
     });
   }
 }
@@ -356,4 +461,8 @@ void updateValidationData(FormStateHelper model) =>
       RegistrationEndDateValueKey:
           getValidationMessage(RegistrationEndDateValueKey),
       RegistrationLinkValueKey: getValidationMessage(RegistrationLinkValueKey),
+      MinimumPercentageValueKey:
+          getValidationMessage(MinimumPercentageValueKey),
+      CompanyWebsiteValueKey: getValidationMessage(CompanyWebsiteValueKey),
+      JobLocationValueKey: getValidationMessage(JobLocationValueKey),
     });

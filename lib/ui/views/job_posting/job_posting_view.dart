@@ -26,6 +26,15 @@ import 'job_posting_viewmodel.dart';
     FormTextField(
         name: 'RegistrationLink',
         validator: JobPostingValidators.registrationLinkValidator),
+    FormTextField(
+        name: "MinimumPercentage",
+        validator: JobPostingValidators.percentageValidator),
+    FormTextField(
+        name: "CompanyWebsite",
+        validator: JobPostingValidators.companyWebsiteValidator),
+    FormTextField(
+        name: "JobLocation",
+        validator: JobPostingValidators.jobLocationValidator),
   ],
 )
 class JobPostingView extends StackedView<JobPostingViewModel>
@@ -68,20 +77,197 @@ class JobPostingView extends StackedView<JobPostingViewModel>
                   numericalKeyboard: false,
                   formValidator: JobPostingValidators.companyNameValidator),
               formField(
-                  Heading: "Job Profile",
-                  controller: jobProfileController,
-                  numericalKeyboard: false,
-                  formValidator: JobPostingValidators.jobTitleValidator),
-              formField(
                   Heading: "Job Description",
                   controller: jobDescriptionController,
                   numericalKeyboard: false,
                   formValidator: JobPostingValidators.jobDescriptionValidator),
               formField(
+                  Heading: "Job Profile",
+                  controller: jobProfileController,
+                  numericalKeyboard: false,
+                  formValidator: JobPostingValidators.jobTitleValidator),
+              formField(
                   Heading: "Expected CTC",
                   controller: expectedCTCController,
-                  numericalKeyboard: true,
+                  numericalKeyboard: false,
                   formValidator: JobPostingValidators.expectedCTCValidator),
+              formField(
+                  Heading: "Registration Link",
+                  controller: registrationLinkController,
+                  numericalKeyboard: false,
+                  formValidator:
+                      JobPostingValidators.registrationLinkValidator),
+              formField(
+                  Heading: "Company Website ",
+                  controller: companyWebsiteController,
+                  numericalKeyboard: false,
+                  formValidator: JobPostingValidators.companyWebsiteValidator),
+              formField(
+                  Heading: "Job Location",
+                  controller: jobLocationController,
+                  numericalKeyboard: false,
+                  formValidator: JobPostingValidators.jobLocationValidator),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Select Branches",
+              ),
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.cseValue,
+                              onChanged: (value) {
+                                viewModel.cseValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "CSE");
+                              }),
+                          const Text("CSE")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.cseAIMLValue,
+                              onChanged: (value) {
+                                viewModel.cseAIMLValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "CSE - AIML");
+                              }),
+                          const Text("CSE - AIML")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.cseDSValue,
+                              onChanged: (value) {
+                                viewModel.cseDSValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "CSE-DS");
+                              }),
+                          const Text("CSE-DS")
+                        ],
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.itValue,
+                              onChanged: (value) {
+                                viewModel.itValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "IT");
+                              }),
+                          const Text("IT")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.csValue,
+                              onChanged: (value) {
+                                viewModel.csValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "CS");
+                              }),
+                          const Text("CS")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.eceValue,
+                              onChanged: (value) {
+                                viewModel.eceValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "ECE");
+                              }),
+                          const Text("ECE")
+                        ],
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.enValue,
+                              onChanged: (value) {
+                                viewModel.enValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "EN");
+                              }),
+                          const Text("EN")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.meValue,
+                              onChanged: (value) {
+                                viewModel.meValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "ME");
+                              }),
+                          const Text("ME")
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: viewModel.ceValue,
+                              onChanged: (value) {
+                                viewModel.ceValue = value!;
+                                viewModel.rebuildUi();
+                                viewModel.addBranch(value, "CE");
+                              }),
+                          const Text("CE")
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              formField(
+                  Heading: "Minimum Percentage",
+                  controller: minimumPercentageController,
+                  numericalKeyboard: true,
+                  formValidator: JobPostingValidators.percentageValidator),
+              const Text(
+                "Registration End Date",
+              ),
+              TextField(
+                controller: registrationEndDateController,
+                decoration: const InputDecoration(),
+                onTap: () async {
+                  viewModel.pickDate(context);
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Select Job Description",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               GestureDetector(
                 onTap: () {
                   viewModel.selectFile();
@@ -102,25 +288,6 @@ class JobPostingView extends StackedView<JobPostingViewModel>
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                "Registration End Date",
-              ),
-              TextField(
-                controller: registrationEndDateController,
-                decoration: const InputDecoration(),
-                onTap: () async {
-                  viewModel.pickDate(context);
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              formField(
-                  Heading: "Registration Link",
-                  controller: registrationLinkController,
-                  numericalKeyboard: false,
-                  formValidator:
-                      JobPostingValidators.registrationLinkValidator),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -199,5 +366,32 @@ class JobPostingView extends StackedView<JobPostingViewModel>
     // TODO: implement onViewModelReady
     super.onViewModelReady(viewModel);
     syncFormWithViewModel(viewModel);
+  }
+}
+
+class BranchCheckBox extends StatelessWidget {
+  bool value;
+  String branchName;
+  void Function(bool?, String branch)? addBranch;
+  BranchCheckBox({
+    super.key,
+    required this.value,
+    required this.branchName,
+    required this.addBranch,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+            value: value,
+            onChanged: (value) {
+              this.value = value!;
+              addBranch!(value, branchName);
+            }),
+        Text(branchName),
+      ],
+    );
   }
 }

@@ -1,4 +1,9 @@
+import 'package:ccpd_app_stacked/links/asset_links.dart';
+import 'package:ccpd_app_stacked/models/JobDashboard.dart';
+import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 
 import 'dashboard_viewmodel.dart';
@@ -13,12 +18,188 @@ class DashboardView extends StackedView<DashboardViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dashboard"),
-      ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+          child: ListView(
+            children: [
+              verticalSpaceSmall,
+              Row(
+                children: [
+                  const Text(
+                    "C a m p u s E a s e",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xff565fc6)),
+                  ),
+                  Expanded(child: Container()),
+                  Image.network(ABESLogoURL)
+                ],
+              ),
+              verticalSpaceSmall,
+              Row(
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hello Team, ",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        "CCPD",
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(child: Container()),
+                  CircleAvatar(
+                    backgroundColor: Colors.grey[300],
+                    child: const Icon(Icons.notifications_outlined),
+                  )
+                ],
+              ),
+              verticalSpaceSmall,
+              // First row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DashboardCell(
+                    upperHeading: "Total Placed",
+                    value: "836",
+                    lowerHeading: "Students",
+                  ),
+                  DashboardCell(
+                    upperHeading: "Total Unplaced",
+                    value: "542",
+                    lowerHeading: "Students",
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DashboardCell(
+                      upperHeading: "Upcoming Drives",
+                      lowerHeading: "Drives",
+                      value: "12"),
+                  DashboardCell(
+                    upperHeading: "Offers made",
+                    value: "280",
+                    lowerHeading: "offers",
+                  ),
+                ],
+              ),
+              verticalSpaceSmall,
+              SizedBox(
+                height: 125,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    DashboardBanner(
+                      onTap: viewModel.onTapBanner,
+                      imageLink: dashboardBanner1,
+                    ),
+                    DashboardBanner(
+                      onTap: viewModel.onTapBanner,
+                      imageLink: dashboardBanner2,
+                    ),
+                    DashboardBanner(
+                      onTap: viewModel.onTapBanner,
+                      imageLink: dashboardBanner3,
+                    ),
+                    DashboardBanner(
+                      onTap: viewModel.onTapBanner,
+                      imageLink: dashboardBanner4,
+                    ),
+                    DashboardBanner(
+                      onTap: viewModel.onTapBanner,
+                      imageLink: dashboardBanner5,
+                    ),
+                  ],
+                ),
+              ),
+              verticalSpaceSmall,
+              Text(
+                "Applications Posted",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              verticalSpaceSmall,
+              Row(
+                children: [
+                  TableCell(
+                    value: "Company",
+                    bold: true,
+                  ),
+                  TableCell(
+                    value: "Drive Date",
+                    bold: true,
+                  ),
+                  TableCell(
+                    value: "Registered",
+                    bold: true,
+                    center: true,
+                  ),
+                  TableCell(
+                    value: "Pending",
+                    bold: true,
+                    center: true,
+                  ),
+                ],
+              ),
+              Divider(),
+              verticalSpaceSmall,
+              SizedBox(
+                height: 50 * viewModel.jobs.length.toDouble(),
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: viewModel.jobs.length,
+                    itemBuilder: (context, index) {
+                      JobOnDashboard job = viewModel.jobs[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xfff7f7f7),
+                            border: Border.all(color: const Color(0xfff7f7f7)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8, top: 8.0),
+                            child: Row(
+                              children: [
+                                TableCell(
+                                  value: "  ${job.companyName}",
+                                  bold: true,
+                                  size: 16,
+                                ),
+                                TableCell(
+                                  value: job.driveDate,
+                                ),
+                                TableCell(
+                                  value: job.registered,
+                                  center: true,
+                                ),
+                                TableCell(
+                                  value: job.pending,
+                                  center: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -28,4 +209,106 @@ class DashboardView extends StackedView<DashboardViewModel> {
     BuildContext context,
   ) =>
       DashboardViewModel();
+}
+
+class TableCell extends StatelessWidget {
+  final String value;
+  final bool bold;
+  final double size;
+  final bool center;
+
+  const TableCell({
+    super.key,
+    required this.value,
+    this.bold = false,
+    this.size = 13,
+    this.center = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.2,
+      child: Text(
+        value,
+        style: TextStyle(
+            fontSize: size, fontWeight: bold ? FontWeight.bold : null),
+        textAlign: center ? TextAlign.center : TextAlign.start,
+      ),
+    );
+  }
+}
+
+class DashboardBanner extends StatelessWidget {
+  final void Function()? onTap;
+  final String imageLink;
+  const DashboardBanner({
+    super.key,
+    required this.onTap,
+    required this.imageLink,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        GestureDetector(onTap: onTap, child: Image.network(imageLink)),
+        SizedBox(
+          width: 5,
+        ),
+      ],
+    );
+  }
+}
+
+class DashboardCell extends StatelessWidget {
+  final String upperHeading, lowerHeading, value;
+
+  const DashboardCell({
+    super.key,
+    required this.upperHeading,
+    required this.lowerHeading,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 90,
+        width: MediaQuery.of(context).size.width * 0.35,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey, width: 1),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                upperHeading,
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                value,
+                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                lowerHeading,
+                style: TextStyle(fontSize: 8, color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

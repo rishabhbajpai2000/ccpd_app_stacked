@@ -15,7 +15,7 @@ class StartupViewModel extends BaseViewModel {
     bool hasLoggedInUser = await _loginService.isLoggedIn();
     _logger.i("hasLoggedInUser: $hasLoggedInUser");
     hasLoggedInUser
-        ? _navigationService.replaceWith(Routes.homeView)
+        ? _navigationService.clearStackAndShow(Routes.homeView)
         : _navigationService.replaceWith(Routes.initialWelcomeScreenView);
   }
 }

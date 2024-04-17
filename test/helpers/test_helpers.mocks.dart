@@ -8,7 +8,8 @@ import 'dart:ui' as _i8;
 
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i10;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i9;
-import 'package:ccpd_app_stacked/services/utils_service.dart' as _i11;
+import 'package:ccpd_app_stacked/services/utils_service.dart' as _i12;
+import 'package:file_picker/file_picker.dart' as _i11;
 import 'package:flutter/material.dart' as _i6;
 import 'package:logger/src/logger.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -849,7 +850,8 @@ class MockLoginService extends _i1.Mock implements _i9.LoginService {
 /// See the documentation for Mockito's code generation for more information.
 class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
   @override
-  _i7.Future<String> getTheJDLink({dynamic file}) => (super.noSuchMethod(
+  _i7.Future<String> getTheJDLink({_i11.PlatformFile? file}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getTheJDLink,
           [],
@@ -878,4 +880,4 @@ class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
 /// A class which mocks [UtilsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUtilsService extends _i1.Mock implements _i11.UtilsService {}
+class MockUtilsService extends _i1.Mock implements _i12.UtilsService {}
