@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'JobDashboard.dart';
+part of 'job_on_dashboard.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+JobOnDashboard _$JobOnDashboardFromJson(Map<String, dynamic> json) {
+  return _JobOnDashboard.fromJson(json);
+}
+
 /// @nodoc
 mixin _$JobOnDashboard {
   String get companyName => throw _privateConstructorUsedError;
@@ -21,6 +25,7 @@ mixin _$JobOnDashboard {
   String get registered => throw _privateConstructorUsedError;
   String get pending => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $JobOnDashboardCopyWith<JobOnDashboard> get copyWith =>
       throw _privateConstructorUsedError;
@@ -131,7 +136,7 @@ class __$$JobOnDashboardImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$JobOnDashboardImpl extends _JobOnDashboard {
   const _$JobOnDashboardImpl(
       {required this.companyName,
@@ -139,6 +144,9 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
       required this.registered,
       required this.pending})
       : super._();
+
+  factory _$JobOnDashboardImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobOnDashboardImplFromJson(json);
 
   @override
   final String companyName;
@@ -168,6 +176,7 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
             (identical(other.pending, pending) || other.pending == pending));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, companyName, driveDate, registered, pending);
@@ -178,6 +187,13 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
   _$$JobOnDashboardImplCopyWith<_$JobOnDashboardImpl> get copyWith =>
       __$$JobOnDashboardImplCopyWithImpl<_$JobOnDashboardImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$JobOnDashboardImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _JobOnDashboard extends JobOnDashboard {
@@ -187,6 +203,9 @@ abstract class _JobOnDashboard extends JobOnDashboard {
       required final String registered,
       required final String pending}) = _$JobOnDashboardImpl;
   const _JobOnDashboard._() : super._();
+
+  factory _JobOnDashboard.fromJson(Map<String, dynamic> json) =
+      _$JobOnDashboardImpl.fromJson;
 
   @override
   String get companyName;

@@ -363,7 +363,6 @@ class JobPostingView extends StackedView<JobPostingViewModel>
 
   @override
   void onViewModelReady(JobPostingViewModel viewModel) {
-    // TODO: implement onViewModelReady
     super.onViewModelReady(viewModel);
     syncFormWithViewModel(viewModel);
   }

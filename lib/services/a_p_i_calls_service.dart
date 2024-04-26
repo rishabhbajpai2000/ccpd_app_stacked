@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
+import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:file_picker/file_picker.dart';
 import "package:http/http.dart" as http;
@@ -51,8 +52,8 @@ class APICallsService {
     String data = jsonEncode(body);
     _logger.i(body);
 
-    final response = await http.post(Uri.parse(jobPostingAPILink),
-        headers: headers, body: data);
+    final response =
+        await http.post(Uri.parse(jobAPILink), headers: headers, body: data);
 
     int statusCode = response.statusCode;
     _logger.i("statusCode: $statusCode");
@@ -83,5 +84,18 @@ class APICallsService {
   Future<String> getTheJDLink({PlatformFile? file}) async {
     // TODO: will implement it with the supabase integration.
     return "www.google.com";
+  }
+
+  Future<List<JobOnDashboard>> getJobsOnDashboard() async {
+    List<JobOnDashboard> jobs = [];
+    final response = await http.get(Uri.parse(jobAPILink));
+    _logger.i(response.body);
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+      for (var job in data) {
+        jobs.add(JobOnDashboard.fromJson(job));
+      }
+    }
+    return jobs;
   }
 }

@@ -6,9 +6,10 @@
 import 'dart:async' as _i7;
 import 'dart:ui' as _i8;
 
+import 'package:ccpd_app_stacked/models/job_on_dashboard.dart' as _i12;
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i10;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i9;
-import 'package:ccpd_app_stacked/services/utils_service.dart' as _i12;
+import 'package:ccpd_app_stacked/services/utils_service.dart' as _i13;
 import 'package:file_picker/file_picker.dart' as _i11;
 import 'package:flutter/material.dart' as _i6;
 import 'package:logger/src/logger.dart' as _i3;
@@ -875,9 +876,22 @@ class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
           ),
         )),
       ) as _i7.Future<String>);
+
+  @override
+  _i7.Future<List<_i12.JobOnDashboard>> getJobsOnDashboard() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getJobsOnDashboard,
+          [],
+        ),
+        returnValue: _i7.Future<List<_i12.JobOnDashboard>>.value(
+            <_i12.JobOnDashboard>[]),
+        returnValueForMissingStub: _i7.Future<List<_i12.JobOnDashboard>>.value(
+            <_i12.JobOnDashboard>[]),
+      ) as _i7.Future<List<_i12.JobOnDashboard>>);
 }
 
 /// A class which mocks [UtilsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUtilsService extends _i1.Mock implements _i12.UtilsService {}
+class MockUtilsService extends _i1.Mock implements _i13.UtilsService {}

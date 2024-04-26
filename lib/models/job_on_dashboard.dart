@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'JobDashboard.freezed.dart';
-
+part 'job_on_dashboard.g.dart';
+part 'job_on_dashboard.freezed.dart';
 
 @freezed
 class JobOnDashboard with _$JobOnDashboard {
@@ -11,5 +10,9 @@ class JobOnDashboard with _$JobOnDashboard {
       required String driveDate,
       required String registered,
       required String pending}) = _JobOnDashboard;
+  factory JobOnDashboard.fromJson(Map<String, dynamic> json) => _$JobOnDashboardFromJson(json);
+  
+  @override
+  Map<String, dynamic> toJson() => _$$JobOnDashboardImplToJson(this as _$JobOnDashboardImpl);
 }
 // flutter pub run build_runner watch --delete-conflicting-outputs
