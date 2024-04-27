@@ -8,8 +8,9 @@ class JobOnDashboard with _$JobOnDashboard {
   const factory JobOnDashboard(
       {required String companyName,
       required String driveDate,
-      required String registered,
-      required String pending}) = _JobOnDashboard;
+      required int registered,
+      required int pending, 
+      required List<int> id}) = _JobOnDashboard;
   factory JobOnDashboard.fromJson(Map<String, dynamic> json) => _$JobOnDashboardFromJson(json);
   
   @override

@@ -221,11 +221,11 @@ class JobRow extends StatelessWidget {
                 value: job.driveDate,
               ),
               TableCell(
-                value: job.registered,
+                value: job.registered.toString(),
                 center: true,
               ),
               TableCell(
-                value: job.pending,
+                value: job.pending.toString(),
                 center: true,
               ),
             ],

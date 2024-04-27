@@ -22,8 +22,9 @@ JobOnDashboard _$JobOnDashboardFromJson(Map<String, dynamic> json) {
 mixin _$JobOnDashboard {
   String get companyName => throw _privateConstructorUsedError;
   String get driveDate => throw _privateConstructorUsedError;
-  String get registered => throw _privateConstructorUsedError;
-  String get pending => throw _privateConstructorUsedError;
+  int get registered => throw _privateConstructorUsedError;
+  int get pending => throw _privateConstructorUsedError;
+  List<int> get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,8 +41,9 @@ abstract class $JobOnDashboardCopyWith<$Res> {
   $Res call(
       {String companyName,
       String driveDate,
-      String registered,
-      String pending});
+      int registered,
+      int pending,
+      List<int> id});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$JobOnDashboardCopyWithImpl<$Res, $Val extends JobOnDashboard>
     Object? driveDate = null,
     Object? registered = null,
     Object? pending = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       companyName: null == companyName
@@ -74,11 +77,15 @@ class _$JobOnDashboardCopyWithImpl<$Res, $Val extends JobOnDashboard>
       registered: null == registered
           ? _value.registered
           : registered // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       pending: null == pending
           ? _value.pending
           : pending // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -94,8 +101,9 @@ abstract class _$$JobOnDashboardImplCopyWith<$Res>
   $Res call(
       {String companyName,
       String driveDate,
-      String registered,
-      String pending});
+      int registered,
+      int pending,
+      List<int> id});
 }
 
 /// @nodoc
@@ -113,6 +121,7 @@ class __$$JobOnDashboardImplCopyWithImpl<$Res>
     Object? driveDate = null,
     Object? registered = null,
     Object? pending = null,
+    Object? id = null,
   }) {
     return _then(_$JobOnDashboardImpl(
       companyName: null == companyName
@@ -126,11 +135,15 @@ class __$$JobOnDashboardImplCopyWithImpl<$Res>
       registered: null == registered
           ? _value.registered
           : registered // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       pending: null == pending
           ? _value.pending
           : pending // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
+      id: null == id
+          ? _value._id
+          : id // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -142,8 +155,10 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
       {required this.companyName,
       required this.driveDate,
       required this.registered,
-      required this.pending})
-      : super._();
+      required this.pending,
+      required final List<int> id})
+      : _id = id,
+        super._();
 
   factory _$JobOnDashboardImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobOnDashboardImplFromJson(json);
@@ -153,13 +168,20 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
   @override
   final String driveDate;
   @override
-  final String registered;
+  final int registered;
   @override
-  final String pending;
+  final int pending;
+  final List<int> _id;
+  @override
+  List<int> get id {
+    if (_id is EqualUnmodifiableListView) return _id;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_id);
+  }
 
   @override
   String toString() {
-    return 'JobOnDashboard(companyName: $companyName, driveDate: $driveDate, registered: $registered, pending: $pending)';
+    return 'JobOnDashboard(companyName: $companyName, driveDate: $driveDate, registered: $registered, pending: $pending, id: $id)';
   }
 
   @override
@@ -173,13 +195,14 @@ class _$JobOnDashboardImpl extends _JobOnDashboard {
                 other.driveDate == driveDate) &&
             (identical(other.registered, registered) ||
                 other.registered == registered) &&
-            (identical(other.pending, pending) || other.pending == pending));
+            (identical(other.pending, pending) || other.pending == pending) &&
+            const DeepCollectionEquality().equals(other._id, _id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, companyName, driveDate, registered, pending);
+  int get hashCode => Object.hash(runtimeType, companyName, driveDate,
+      registered, pending, const DeepCollectionEquality().hash(_id));
 
   @JsonKey(ignore: true)
   @override
@@ -200,8 +223,9 @@ abstract class _JobOnDashboard extends JobOnDashboard {
   const factory _JobOnDashboard(
       {required final String companyName,
       required final String driveDate,
-      required final String registered,
-      required final String pending}) = _$JobOnDashboardImpl;
+      required final int registered,
+      required final int pending,
+      required final List<int> id}) = _$JobOnDashboardImpl;
   const _JobOnDashboard._() : super._();
 
   factory _JobOnDashboard.fromJson(Map<String, dynamic> json) =
@@ -212,9 +236,11 @@ abstract class _JobOnDashboard extends JobOnDashboard {
   @override
   String get driveDate;
   @override
-  String get registered;
+  int get registered;
   @override
-  String get pending;
+  int get pending;
+  @override
+  List<int> get id;
   @override
   @JsonKey(ignore: true)
   _$$JobOnDashboardImplCopyWith<_$JobOnDashboardImpl> get copyWith =>
