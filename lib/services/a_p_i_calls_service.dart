@@ -99,4 +99,15 @@ class APICallsService {
     }
     return jobs;
   }
+
+  Future<Map<String, dynamic>> getDashboardDisplayData() async {
+    Map<String, dynamic> data = {};
+    final response = await http.get(Uri.parse(dashboardDataAPILink));
+    _logger.i(response.body);
+    if (response.statusCode == 200) {
+      data = jsonDecode(response.body);
+      return data;
+    }
+    return data;
+  }
 }

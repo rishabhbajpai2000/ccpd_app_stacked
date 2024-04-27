@@ -889,6 +889,19 @@ class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
         returnValueForMissingStub: _i7.Future<List<_i12.JobOnDashboard>>.value(
             <_i12.JobOnDashboard>[]),
       ) as _i7.Future<List<_i12.JobOnDashboard>>);
+
+  @override
+  _i7.Future<Map<String, dynamic>> getDashboardDisplayData() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDashboardDisplayData,
+          [],
+        ),
+        returnValue:
+            _i7.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+        returnValueForMissingStub:
+            _i7.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i7.Future<Map<String, dynamic>>);
 }
 
 /// A class which mocks [UtilsService].

@@ -2,6 +2,8 @@ import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:stacked/stacked.dart';
 
 import 'dashboard_viewmodel.dart';
@@ -62,31 +64,32 @@ class DashboardView extends StackedView<DashboardViewModel> {
               ),
               verticalSpaceSmall,
               // First row
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DashboardCell(
                     upperHeading: "Total Placed",
-                    value: "836",
+                    value: viewModel.totalPlaced,
                     lowerHeading: "Students",
                   ),
                   DashboardCell(
                     upperHeading: "Total Unplaced",
-                    value: "542",
+                    value: viewModel.totalUnplaced,
                     lowerHeading: "Students",
                   ),
                 ],
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   DashboardCell(
-                      upperHeading: "Upcoming Drives",
-                      lowerHeading: "Drives",
-                      value: "12"),
+                    upperHeading: "Upcoming Drives",
+                    lowerHeading: "Drives",
+                    value: viewModel.upcomingDrives,
+                  ),
                   DashboardCell(
                     upperHeading: "Offers made",
-                    value: "280",
+                    value: viewModel.offersMade,
                     lowerHeading: "offers",
                   ),
                 ],
@@ -288,7 +291,8 @@ class DashboardBanner extends StatelessWidget {
 }
 
 class DashboardCell extends StatelessWidget {
-  final String upperHeading, lowerHeading, value;
+  final String upperHeading, lowerHeading;
+  final String? value;
 
   const DashboardCell({
     super.key,
@@ -321,11 +325,17 @@ class DashboardCell extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                value,
-                style:
-                    const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-              ),
+              value == null
+                  ? const SizedBox(
+                      width: 30,
+                      height: 30,
+                      child:
+                          LoadingIndicator(indicatorType: Indicator.lineScale))
+                  : Text(
+                      value!,
+                      style: const TextStyle(
+                          fontSize: 19, fontWeight: FontWeight.bold),
+                    ),
               const SizedBox(
                 height: 5,
               ),

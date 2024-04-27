@@ -5,6 +5,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 
 class DashboardViewModel extends BaseViewModel {
+  String? totalPlaced;
+  String? totalUnplaced;
+  String? upcomingDrives;
+  String? offersMade;
   final _apiCallService = locator<APICallsService>();
 
   List<JobOnDashboard>? jobs;
@@ -13,6 +17,13 @@ class DashboardViewModel extends BaseViewModel {
   }
 
   Future<void> init() async {
+    Map<String, dynamic> dashboardData =
+        await _apiCallService.getDashboardDisplayData();
+    totalPlaced = dashboardData["placed"].toString();
+    totalUnplaced = dashboardData["unplaced"].toString();
+    upcomingDrives = dashboardData["upcomingDrives"].toString();
+    offersMade = dashboardData["totalOffers"].toString();
+
     jobs = await _apiCallService.getJobsOnDashboard();
     notifyListeners();
   }
