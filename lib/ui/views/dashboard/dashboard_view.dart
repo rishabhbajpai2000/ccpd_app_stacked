@@ -2,8 +2,9 @@ import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import "package:url_launcher/url_launcher.dart";
 import 'package:stacked/stacked.dart';
 
 import 'dashboard_viewmodel.dart';
@@ -100,26 +101,26 @@ class DashboardView extends StackedView<DashboardViewModel> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    DashboardBanner(
-                      onTap: viewModel.onTapBanner,
-                      imageLink: dashboardBanner1,
-                    ),
-                    DashboardBanner(
-                      onTap: viewModel.onTapBanner,
-                      imageLink: dashboardBanner2,
-                    ),
-                    DashboardBanner(
-                      onTap: viewModel.onTapBanner,
-                      imageLink: dashboardBanner3,
-                    ),
-                    DashboardBanner(
-                      onTap: viewModel.onTapBanner,
-                      imageLink: dashboardBanner4,
-                    ),
-                    DashboardBanner(
-                      onTap: viewModel.onTapBanner,
-                      imageLink: dashboardBanner5,
-                    ),
+                  DashboardBanner(
+                        imageAddress: "MechanicalFAQ.pdf",
+                        imageLink: dashboardBanner1,
+                      ),
+                      DashboardBanner(
+                        imageAddress: "MechanicalFAQ.pdf",
+                        imageLink: dashboardBanner2,
+                      ),
+                      DashboardBanner(
+                        imageAddress: "CivilFAQ.pdf",
+                        imageLink: dashboardBanner3,
+                      ),
+                      DashboardBanner(
+                        imageAddress: "ElectricalFAQ.pdf",
+                        imageLink: dashboardBanner4,
+                      ),
+                      DashboardBanner(
+                        imageAddress: "ElectronicsFAQ.pdf",
+                        imageLink: dashboardBanner5,
+                      ),
                   ],
                 ),
               ),
@@ -269,19 +270,25 @@ class TableCell extends StatelessWidget {
 }
 
 class DashboardBanner extends StatelessWidget {
-  final void Function()? onTap;
   final String imageLink;
-  const DashboardBanner({
-    super.key,
-    required this.onTap,
-    required this.imageLink,
-  });
+  const DashboardBanner(
+      {super.key, required this.imageLink, required this.imageAddress});
+  final String imageAddress;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(onTap: onTap, child: Image.network(imageLink)),
+        GestureDetector(
+            onTap: () async {
+              final String link =
+                  "$baseImageAddress/Assets/QuestionDocs/$imageAddress";
+              final Uri url = Uri.parse(link);
+              if (!await launchUrl(url)) {
+                Fluttertoast.showToast(msg: "Could not Load PDF");
+              }
+            },
+            child: Image.network(imageLink)),
         const SizedBox(
           width: 5,
         ),
