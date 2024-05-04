@@ -9,6 +9,7 @@ import 'dart:ui' as _i8;
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart' as _i12;
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i10;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i9;
+import 'package:ccpd_app_stacked/services/notification_service.dart' as _i14;
 import 'package:ccpd_app_stacked/services/utils_service.dart' as _i13;
 import 'package:file_picker/file_picker.dart' as _i11;
 import 'package:flutter/material.dart' as _i6;
@@ -908,3 +909,9 @@ class MockAPICallsService extends _i1.Mock implements _i10.APICallsService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUtilsService extends _i1.Mock implements _i13.UtilsService {}
+
+/// A class which mocks [NotificationService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNotificationService extends _i1.Mock
+    implements _i14.NotificationService {}

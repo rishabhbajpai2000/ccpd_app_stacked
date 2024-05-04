@@ -9,11 +9,13 @@ class JobOnDashboard with _$JobOnDashboard {
       {required String companyName,
       required String driveDate,
       required int registered,
-      required int pending, 
+      required int pending,
       required List<int> id}) = _JobOnDashboard;
-  factory JobOnDashboard.fromJson(Map<String, dynamic> json) => _$JobOnDashboardFromJson(json);
-  
+  factory JobOnDashboard.fromJson(Map<String, dynamic> json) =>
+      _$JobOnDashboardFromJson(json);
+
   @override
-  Map<String, dynamic> toJson() => _$$JobOnDashboardImplToJson(this as _$JobOnDashboardImpl);
+  Map<String, dynamic> toJson() =>
+      _$$JobOnDashboardImplToJson(this as _$JobOnDashboardImpl);
 }
 // flutter pub run build_runner watch --delete-conflicting-outputs

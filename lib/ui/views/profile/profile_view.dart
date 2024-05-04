@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,15 +20,28 @@ class ProfileView extends StackedView<ProfileViewModel> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: Center(
-          child: GestureDetector(
-              onTap: () {
-                viewModel.logOut();
-              },
-              child: Text(
-                "LogOut",
-                style: TextStyle(fontSize: 50),
-              )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  viewModel.logOut();
+                },
+                child: Text(
+                  "LogOut",
+                  style: TextStyle(fontSize: 50),
+                )),
+            verticalSpaceMedium,
+            GestureDetector(
+                onTap: () {
+                  viewModel.sendNotification();
+                },
+                child: Text(
+                  "Send Notification",
+                  style: TextStyle(fontSize: 40),
+                )),
+          ],
         ),
       ),
     );

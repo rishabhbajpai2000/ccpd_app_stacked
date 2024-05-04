@@ -2,7 +2,6 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {

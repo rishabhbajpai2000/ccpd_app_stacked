@@ -22,7 +22,8 @@ class StartupView extends StackedView<StartupViewModel> {
           padding: const EdgeInsets.all(40.0),
           child: Stack(
             children: [
-              Positioned(top: 0, right: 0, child: Image.network(ABESLogoTransparent)),
+              Positioned(
+                  top: 0, right: 0, child: Image.network(ABESLogoTransparent)),
               const Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

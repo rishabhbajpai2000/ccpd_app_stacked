@@ -101,26 +101,26 @@ class DashboardView extends StackedView<DashboardViewModel> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                  DashboardBanner(
-                        imageAddress: "MechanicalFAQ.pdf",
-                        imageLink: dashboardBanner1,
-                      ),
-                      DashboardBanner(
-                        imageAddress: "MechanicalFAQ.pdf",
-                        imageLink: dashboardBanner2,
-                      ),
-                      DashboardBanner(
-                        imageAddress: "CivilFAQ.pdf",
-                        imageLink: dashboardBanner3,
-                      ),
-                      DashboardBanner(
-                        imageAddress: "ElectricalFAQ.pdf",
-                        imageLink: dashboardBanner4,
-                      ),
-                      DashboardBanner(
-                        imageAddress: "ElectronicsFAQ.pdf",
-                        imageLink: dashboardBanner5,
-                      ),
+                    DashboardBanner(
+                      imageAddress: "MechanicalFAQ.pdf",
+                      imageLink: dashboardBanner1,
+                    ),
+                    DashboardBanner(
+                      imageAddress: "MechanicalFAQ.pdf",
+                      imageLink: dashboardBanner2,
+                    ),
+                    DashboardBanner(
+                      imageAddress: "CivilFAQ.pdf",
+                      imageLink: dashboardBanner3,
+                    ),
+                    DashboardBanner(
+                      imageAddress: "ElectricalFAQ.pdf",
+                      imageLink: dashboardBanner4,
+                    ),
+                    DashboardBanner(
+                      imageAddress: "ElectronicsFAQ.pdf",
+                      imageLink: dashboardBanner5,
+                    ),
                   ],
                 ),
               ),

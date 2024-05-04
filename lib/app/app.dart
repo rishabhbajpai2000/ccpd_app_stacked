@@ -13,6 +13,7 @@ import 'package:ccpd_app_stacked/ui/views/profile/profile_view.dart';
 import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
+import 'package:ccpd_app_stacked/services/notification_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -35,6 +36,7 @@ import 'package:ccpd_app_stacked/services/utils_service.dart';
     LazySingleton(classType: LoginService),
     LazySingleton(classType: APICallsService),
     LazySingleton(classType: UtilsService),
+    LazySingleton(classType: NotificationService),
 // @stacked-service
   ],
   bottomsheets: [

@@ -74,8 +74,8 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                 ),
                 const SizedBox(height: 20),
                 CircularButton(
-                    text: viewModel.processing? 'Processing...' : 'Login',
-                    onPressed: () async{
+                    text: viewModel.processing ? 'Processing...' : 'Login',
+                    onPressed: () async {
                       await viewModel.saveData();
                     }),
                 SizedBox(height: 20),
