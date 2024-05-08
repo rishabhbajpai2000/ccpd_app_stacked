@@ -914,4 +914,38 @@ class MockUtilsService extends _i1.Mock implements _i13.UtilsService {}
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationService extends _i1.Mock
-    implements _i14.NotificationService {}
+    implements _i14.NotificationService {
+  @override
+  _i7.Future<void> initOneSignal() => (super.noSuchMethod(
+        Invocation.method(
+          #initOneSignal,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> sendNotification({
+    required List<String>? users,
+    required String? title,
+    required String? description,
+    required String? type,
+    Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendNotification,
+          [],
+          {
+            #users: users,
+            #title: title,
+            #description: description,
+            #type: type,
+            #data: data,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+}

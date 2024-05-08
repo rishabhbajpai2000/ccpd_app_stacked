@@ -110,4 +110,12 @@ class APICallsService {
     }
     return data;
   }
+
+  parseCSV() async {
+    const String csvAPILink = "https://campus-ease.onrender.com/download";
+    final response = await http.get(Uri.parse(csvAPILink));
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+  }
 }

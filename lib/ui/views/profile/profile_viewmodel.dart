@@ -1,6 +1,9 @@
 import 'package:ccpd_app_stacked/app/app.locator.dart';
+import 'package:ccpd_app_stacked/app/app.logger.dart';
+import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
+import 'package:csv/csv.dart';
 import 'package:stacked/stacked.dart';
 
 class ProfileViewModel extends BaseViewModel {
@@ -13,10 +16,20 @@ class ProfileViewModel extends BaseViewModel {
     final notificationService = locator<NotificationService>();
     await notificationService.sendNotification(
       users: ["61b61c55-9458-4b97-adfd-0b33e3f625c4"],
-      title: "rishabh new notification2",
-      description: "This is a test notification",
+      title: "New Job Posted - Please Apply Fast",
+      description: "Job with ID 558 has been posted. Please apply fast.",
       type: "test",
-      data: {"test": "test"},
+      data: {"jobId": "558", "route": "job-details"},
     );
+  }
+
+  void parseCSV() async {
+    final apiCallsServide = APICallsService();
+    final _logger = getLogger("ProfileViewModel");
+    final csv = await apiCallsServide.parseCSV();
+    List<List<dynamic>> rowsAsListOfValues =
+        const CsvToListConverter().convert(csv);
+
+    _logger.i(rowsAsListOfValues);
   }
 }

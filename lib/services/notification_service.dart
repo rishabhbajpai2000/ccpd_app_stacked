@@ -10,7 +10,7 @@ class NotificationService {
   final userId = Supabase.instance.client.auth.currentUser?.id;
   Future<void> initOneSignal() async {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-    OneSignal.initialize("1be38fba-04b1-4b93-a3c6-7656329481f3");
+    OneSignal.initialize("5fea9495-f84e-4953-a0c1-fca3fbf37194");
     OneSignal.Notifications.requestPermission(true);
     await OneSignal.login(userId!);
   }
@@ -25,7 +25,7 @@ class NotificationService {
     Map<String, dynamic> body = {
       "app_id": "1be38fba-04b1-4b93-a3c6-7656329481f3",
       "include_aliases": {
-        "external_id": ["61b61c55-9458-4b97-adfd-0b33e3f625c4", userId]
+        "external_id": ["885e2ca7-f3e5-4b98-ae4d-d6ed4f55a166"]
       },
       "headings": {"en": title},
       "target_channel": "push",

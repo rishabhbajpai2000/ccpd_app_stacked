@@ -14,6 +14,7 @@ import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
+import 'package:ccpd_app_stacked/ui/views/job_details/job_details_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -27,6 +28,7 @@ import 'package:ccpd_app_stacked/services/notification_service.dart';
     MaterialRoute(page: DashboardView),
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: JobPostingView),
+    MaterialRoute(page: JobDetailsView),
 // @stacked-route
   ],
   dependencies: [

@@ -9,16 +9,18 @@ import 'package:ccpd_app_stacked/ui/views/dashboard/dashboard_view.dart' as _i7;
 import 'package:ccpd_app_stacked/ui/views/home/home_view.dart' as _i2;
 import 'package:ccpd_app_stacked/ui/views/initial_welcome_screen/initial_welcome_screen_view.dart'
     as _i4;
+import 'package:ccpd_app_stacked/ui/views/job_details/job_details_view.dart'
+    as _i10;
 import 'package:ccpd_app_stacked/ui/views/job_posting/job_posting_view.dart'
     as _i9;
 import 'package:ccpd_app_stacked/ui/views/login/login_view.dart' as _i5;
 import 'package:ccpd_app_stacked/ui/views/profile/profile_view.dart' as _i8;
 import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.dart' as _i6;
 import 'package:ccpd_app_stacked/ui/views/startup/startup_view.dart' as _i3;
-import 'package:flutter/material.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const homeView = '/home-view';
@@ -37,6 +39,8 @@ class Routes {
 
   static const jobPostingView = '/job-posting-view';
 
+  static const jobDetailsView = '/job-details-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -46,6 +50,7 @@ class Routes {
     dashboardView,
     profileView,
     jobPostingView,
+    jobDetailsView,
   };
 }
 
@@ -83,54 +88,64 @@ class StackedRouter extends _i1.RouterBase {
       Routes.jobPostingView,
       page: _i9.JobPostingView,
     ),
+    _i1.RouteDef(
+      Routes.jobDetailsView,
+      page: _i10.JobDetailsView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.InitialWelcomeScreenView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.InitialWelcomeScreenView(),
         settings: data,
       );
     },
     _i5.LoginView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.LoginView(),
         settings: data,
       );
     },
     _i6.SignUpView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SignUpView(),
         settings: data,
       );
     },
     _i7.DashboardView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.DashboardView(),
         settings: data,
       );
     },
     _i8.ProfileView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.ProfileView(),
         settings: data,
       );
     },
     _i9.JobPostingView: (data) {
-      return _i10.MaterialPageRoute<dynamic>(
+      return _i11.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.JobPostingView(),
+        settings: data,
+      );
+    },
+    _i10.JobDetailsView: (data) {
+      return _i11.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i10.JobDetailsView(),
         settings: data,
       );
     },
@@ -143,7 +158,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i11.NavigationService {
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -256,6 +271,20 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToJobDetailsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.jobDetailsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -362,6 +391,20 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.jobPostingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithJobDetailsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.jobDetailsView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

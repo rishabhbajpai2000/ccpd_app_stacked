@@ -41,6 +41,15 @@ class ProfileView extends StackedView<ProfileViewModel> {
                   "Send Notification",
                   style: TextStyle(fontSize: 40),
                 )),
+            verticalSpaceMedium,
+            GestureDetector(
+                onTap: () {
+                  viewModel.parseCSV();
+                },
+                child: Text(
+                  "Parse CSV",
+                  style: TextStyle(fontSize: 40),
+                )),
           ],
         ),
       ),

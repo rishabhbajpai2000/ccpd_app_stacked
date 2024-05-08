@@ -1,9 +1,11 @@
+import 'package:ccpd_app_stacked/app/app.router.dart';
 import 'package:ccpd_app_stacked/links/asset_links.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:stacked_services/stacked_services.dart';
 import "package:url_launcher/url_launcher.dart";
 import 'package:stacked/stacked.dart';
 
@@ -203,36 +205,41 @@ class JobRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xfff7f7f7),
-          border: Border.all(color: const Color(0xfff7f7f7)),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 8, top: 8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TableCell(
-                value: job.companyName,
-                bold: true,
-                size: 16,
-              ),
-              TableCell(
-                value: job.driveDate,
-              ),
-              TableCell(
-                value: job.registered.toString(),
-                center: true,
-              ),
-              TableCell(
-                value: job.pending.toString(),
-                center: true,
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        NavigationService().navigateToJobDetailsView();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xfff7f7f7),
+            border: Border.all(color: const Color(0xfff7f7f7)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8, top: 8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TableCell(
+                  value: job.companyName,
+                  bold: true,
+                  size: 16,
+                ),
+                TableCell(
+                  value: job.driveDate,
+                ),
+                TableCell(
+                  value: job.registered.toString(),
+                  center: true,
+                ),
+                TableCell(
+                  value: job.pending.toString(),
+                  center: true,
+                ),
+              ],
+            ),
           ),
         ),
       ),
