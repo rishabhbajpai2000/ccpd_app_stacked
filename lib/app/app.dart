@@ -15,6 +15,7 @@ import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
 import 'package:ccpd_app_stacked/ui/views/job_details/job_details_view.dart';
+import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -39,6 +40,7 @@ import 'package:ccpd_app_stacked/ui/views/job_details/job_details_view.dart';
     LazySingleton(classType: APICallsService),
     LazySingleton(classType: UtilsService),
     LazySingleton(classType: NotificationService),
+    LazySingleton(classType: CSVDataHandlingService),
 // @stacked-service
   ],
   bottomsheets: [

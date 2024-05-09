@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/a_p_i_calls_service.dart';
+import '../services/c_s_v_data_handling_service.dart';
 import '../services/login_service.dart';
 import '../services/notification_service.dart';
 import '../services/utils_service.dart';
@@ -34,4 +35,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => APICallsService());
   locator.registerLazySingleton(() => UtilsService());
   locator.registerLazySingleton(() => NotificationService());
+  locator.registerLazySingleton(() => CSVDataHandlingService());
 }

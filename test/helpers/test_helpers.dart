@@ -6,6 +6,7 @@ import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
+import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -18,6 +19,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<APICallsService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<UtilsService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<NotificationService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<CSVDataHandlingService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -28,6 +30,7 @@ void registerServices() {
   getAndRegisterAPICallsService();
   getAndRegisterUtilsService();
   getAndRegisterNotificationService();
+  getAndRegisterCSVDataHandlingService();
 // @stacked-mock-register
 }
 
@@ -106,6 +109,13 @@ MockNotificationService getAndRegisterNotificationService() {
   _removeRegistrationIfExists<NotificationService>();
   final service = MockNotificationService();
   locator.registerSingleton<NotificationService>(service);
+  return service;
+}
+
+MockCSVDataHandlingService getAndRegisterCSVDataHandlingService() {
+  _removeRegistrationIfExists<CSVDataHandlingService>();
+  final service = MockCSVDataHandlingService();
+  locator.registerSingleton<CSVDataHandlingService>(service);
   return service;
 }
 // @stacked-mock-create

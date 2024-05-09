@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -24,22 +25,22 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
       body: SafeArea(
         child: viewModel.job == null
             ? Center(
-                child: SizedBox(
+                child: const SizedBox(
                     height: 50,
                     width: 50,
-                    child: const LoadingIndicator(
+                    child: LoadingIndicator(
                       indicatorType: Indicator.lineScale,
                       colors: [Color(0xff2051E5)],
                     )))
             : ListView(
                 children: [
                   Container(
-                    color: Color(0xffeef2ff),
+                    color: const Color(0xffeef2ff),
                     height: 200,
                     width: screenWidth(context),
                     child: Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
@@ -57,18 +58,18 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                                         .getCompletionRatio(viewModel.job!),
                                     circularStrokeCap: CircularStrokeCap.round,
                                     backgroundColor: Colors.white,
-                                    progressColor: Color(0xff2051E5),
+                                    progressColor: const Color(0xff2051E5),
                                   ),
                                   Text(
                                       viewModel.getCompletionPercentage(
                                           viewModel.job!),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 30,
-                                          color: const Color(0xff2051E5))),
+                                          color: Color(0xff2051E5))),
                                 ],
                               ),
                               verticalSpaceSmall,
-                              Text("Job Completion rate ",
+                              const Text("Job Completion rate ",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.grey)),
                             ],
@@ -88,8 +89,8 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               verticalSpaceMedium,
                               Row(
                                 children: [
-                                  Text("•",
-                                      style: const TextStyle(fontSize: 30)),
+                                  const Text("•",
+                                      style: TextStyle(fontSize: 30)),
                                   horizontalSpaceSmall,
                                   Text(viewModel.job!.jobProfile,
                                       style: const TextStyle(fontSize: 16)),
@@ -97,8 +98,8 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               ),
                               Row(
                                 children: [
-                                  Text("•",
-                                      style: const TextStyle(fontSize: 30)),
+                                  const Text("•",
+                                      style: TextStyle(fontSize: 30)),
                                   horizontalSpaceSmall,
                                   Text(viewModel.job!.expCTC,
                                       style: const TextStyle(fontSize: 16)),
@@ -128,10 +129,12 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               lowerHeading:
                                   viewModel.getRegisteredStudentsPercentage(
                                       job: viewModel.job!),
+                              jobId: viewModel.job!.id[0].toString(),
                             ),
                             JobDetailsCell(
                               upperHeading:
                                   "Un-Registered Students(${viewModel.job!.data['unregistered']})",
+                              jobId: viewModel.job!.id[0].toString(),
                               lowerHeading:
                                   viewModel.getUnregisteredStudentsPercentage(
                                       job: viewModel.job!),
@@ -144,10 +147,12 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               upperHeading:
                                   "Eligible Students(${viewModel.job!.data['total']})",
                               lowerHeading: "50%",
+                              jobId: viewModel.job!.id[0].toString(),
                             ),
                             JobDetailsCell(
                               upperHeading: "Notify All",
                               lowerHeading: "100%",
+                              jobId: viewModel.job!.id[0].toString(),
                             ),
                           ],
                         ),
@@ -237,7 +242,7 @@ class JobDescriptionSection extends StatelessWidget {
                   const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           verticalSpaceSmall,
           Text(content,
-              style: TextStyle(color: link ? Color(0xff8e97fd) : null)),
+              style: TextStyle(color: link ? const Color(0xff8e97fd) : null)),
           verticalSpaceSmall
         ],
       ),
@@ -280,11 +285,13 @@ class JobDetailsPageButton extends StatelessWidget {
 
 class JobDetailsCell extends StatelessWidget {
   final String upperHeading, lowerHeading;
-
-  const JobDetailsCell({
+  final String jobId;
+  final GlobalKey iconKey = GlobalKey();
+  JobDetailsCell({
     super.key,
     required this.upperHeading,
     required this.lowerHeading,
+    required this.jobId,
   });
 
   @override
@@ -296,7 +303,7 @@ class JobDetailsCell extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color(0xffeef2ff),
+          color: const Color(0xffeef2ff),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -310,7 +317,81 @@ class JobDetailsCell extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold)),
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))
+                  IconButton(
+                    key: iconKey,
+                    icon: Icon(Icons.more_vert),
+                    onPressed: () {
+                      final RenderBox? renderBox = iconKey.currentContext
+                          ?.findRenderObject() as RenderBox?;
+                      if (renderBox != null) {
+                        final position = renderBox.localToGlobal(Offset.zero);
+                        final size = renderBox.size;
+
+                        showMenu(
+                          context: context,
+                          position: RelativeRect.fromLTRB(
+                            position.dx,
+                            position.dy + size.height,
+                            position.dx,
+                            position.dy,
+                          ),
+                          items: <PopupMenuEntry>[
+                            // PopupMenuItem(
+                            //   value: 1,
+                            //   child: Row(
+                            //     children: [
+                            //       Icon(Icons.download_outlined),
+                            //       horizontalSpaceSmall,
+                            //       Text("Download"),
+                            //     ],
+                            //   ),
+                            // ),
+                            PopupMenuItem(
+                              onTap: () async {
+                                final _csvDataService =
+                                    CSVDataHandlingService();
+                                await _csvDataService.shareCSV(jobId: jobId);
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.share_outlined),
+                                  horizontalSpaceSmall,
+                                  Text("Share Data"),
+                                ],
+                              ),
+                              value: 2,
+                            ),
+                            PopupMenuItem(
+                              onTap: () {},
+                              child: Row(
+                                children: [
+                                  Icon(Icons.notifications_outlined),
+                                  horizontalSpaceSmall,
+                                  Text("Notify"),
+                                ],
+                              ),
+                              value: 2,
+                            ),
+                          ],
+                        );
+                      }
+                    },
+                  )
+                  // IconButton(
+                  //     onPressed: () {
+                  //       showMenu(
+                  //           context: context,
+                  //           position:
+                  //               const RelativeRect.fromLTRB(100, 100, 100, 100),
+                  //           items: const <PopupMenuEntry>[
+                  //             PopupMenuItem(
+                  //                 value: 1,
+                  //                 child: Text("Notify All")),
+                  //             PopupMenuItem(
+                  //                 child: Text("Notify Selected"), value: 2)
+                  //           ]);
+                  //     },
+                  //     icon: const Icon(Icons.more_vert))
                 ],
               ),
               verticalSpaceMedium,

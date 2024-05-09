@@ -9,6 +9,8 @@ import 'dart:ui' as _i9;
 import 'package:ccpd_app_stacked/models/Job.dart' as _i4;
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart' as _i13;
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i11;
+import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart'
+    as _i16;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i10;
 import 'package:ccpd_app_stacked/services/notification_service.dart' as _i15;
 import 'package:ccpd_app_stacked/services/utils_service.dart' as _i14;
@@ -985,4 +987,20 @@ class MockNotificationService extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
+}
+
+/// A class which mocks [CSVDataHandlingService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCSVDataHandlingService extends _i1.Mock
+    implements _i16.CSVDataHandlingService {
+  @override
+  dynamic shareCSV({required String? jobId}) => super.noSuchMethod(
+        Invocation.method(
+          #shareCSV,
+          [],
+          {#jobId: jobId},
+        ),
+        returnValueForMissingStub: null,
+      );
 }
