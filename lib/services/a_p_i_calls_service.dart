@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
+import 'package:ccpd_app_stacked/models/Job.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:file_picker/file_picker.dart';
@@ -117,5 +118,15 @@ class APICallsService {
     if (response.statusCode == 200) {
       return response.body;
     }
+  }
+
+  Future<Job> getJobDetails({required List<int> ids}) async {
+    String api = jobDetailsAPILink + ids[0].toString();
+    final response = await http.get(Uri.parse(api));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return Job.fromJson(data);
+    }
+    throw Exception("Failed to load the job details");
   }
 }

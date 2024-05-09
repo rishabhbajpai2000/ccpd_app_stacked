@@ -207,7 +207,7 @@ class JobRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigationService().navigateToJobDetailsView();
+        NavigationService().navigateToJobDetailsView(ids: job.id);
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),

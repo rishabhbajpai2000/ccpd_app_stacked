@@ -21,19 +21,31 @@ Job _$JobFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Job {
   List<int> get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "management_id")
   List<int> get managementId => throw _privateConstructorUsedError;
+  @JsonKey(name: "branch_id")
   List<int> get branchId => throw _privateConstructorUsedError;
   List<String> get branches => throw _privateConstructorUsedError;
+  @JsonKey(name: "company_name")
   String get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "end_date")
   String get endDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "exp_ctc")
   String get expCTC => throw _privateConstructorUsedError;
   String get file => throw _privateConstructorUsedError;
+  @JsonKey(name: "job_description")
   String get jobDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: "job_profile")
   String get jobProfile => throw _privateConstructorUsedError;
+  @JsonKey(name: "reg_link")
   String get regLink => throw _privateConstructorUsedError;
+  @JsonKey(name: "start_date")
   String get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "minimum_percentage")
   String get minimumPercentage => throw _privateConstructorUsedError;
+  @JsonKey(name: "job_location")
   String get jobLocation => throw _privateConstructorUsedError;
+  @JsonKey(name: "website_url")
   String get websiteURL => throw _privateConstructorUsedError;
   Map<String, int> get data => throw _privateConstructorUsedError;
 
@@ -49,20 +61,20 @@ abstract class $JobCopyWith<$Res> {
   @useResult
   $Res call(
       {List<int> id,
-      List<int> managementId,
-      List<int> branchId,
+      @JsonKey(name: "management_id") List<int> managementId,
+      @JsonKey(name: "branch_id") List<int> branchId,
       List<String> branches,
-      String companyName,
-      String endDate,
-      String expCTC,
+      @JsonKey(name: "company_name") String companyName,
+      @JsonKey(name: "end_date") String endDate,
+      @JsonKey(name: "exp_ctc") String expCTC,
       String file,
-      String jobDescription,
-      String jobProfile,
-      String regLink,
-      String startDate,
-      String minimumPercentage,
-      String jobLocation,
-      String websiteURL,
+      @JsonKey(name: "job_description") String jobDescription,
+      @JsonKey(name: "job_profile") String jobProfile,
+      @JsonKey(name: "reg_link") String regLink,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "minimum_percentage") String minimumPercentage,
+      @JsonKey(name: "job_location") String jobLocation,
+      @JsonKey(name: "website_url") String websiteURL,
       Map<String, int> data});
 }
 
@@ -172,20 +184,20 @@ abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
   @useResult
   $Res call(
       {List<int> id,
-      List<int> managementId,
-      List<int> branchId,
+      @JsonKey(name: "management_id") List<int> managementId,
+      @JsonKey(name: "branch_id") List<int> branchId,
       List<String> branches,
-      String companyName,
-      String endDate,
-      String expCTC,
+      @JsonKey(name: "company_name") String companyName,
+      @JsonKey(name: "end_date") String endDate,
+      @JsonKey(name: "exp_ctc") String expCTC,
       String file,
-      String jobDescription,
-      String jobProfile,
-      String regLink,
-      String startDate,
-      String minimumPercentage,
-      String jobLocation,
-      String websiteURL,
+      @JsonKey(name: "job_description") String jobDescription,
+      @JsonKey(name: "job_profile") String jobProfile,
+      @JsonKey(name: "reg_link") String regLink,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "minimum_percentage") String minimumPercentage,
+      @JsonKey(name: "job_location") String jobLocation,
+      @JsonKey(name: "website_url") String websiteURL,
       Map<String, int> data});
 }
 
@@ -289,20 +301,20 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
 class _$JobImpl extends _Job {
   const _$JobImpl(
       {required final List<int> id,
-      required final List<int> managementId,
-      required final List<int> branchId,
+      @JsonKey(name: "management_id") required final List<int> managementId,
+      @JsonKey(name: "branch_id") required final List<int> branchId,
       required final List<String> branches,
-      required this.companyName,
-      required this.endDate,
-      required this.expCTC,
+      @JsonKey(name: "company_name") required this.companyName,
+      @JsonKey(name: "end_date") required this.endDate,
+      @JsonKey(name: "exp_ctc") required this.expCTC,
       required this.file,
-      required this.jobDescription,
-      required this.jobProfile,
-      required this.regLink,
-      required this.startDate,
-      required this.minimumPercentage,
-      required this.jobLocation,
-      required this.websiteURL,
+      @JsonKey(name: "job_description") required this.jobDescription,
+      @JsonKey(name: "job_profile") required this.jobProfile,
+      @JsonKey(name: "reg_link") required this.regLink,
+      @JsonKey(name: "start_date") required this.startDate,
+      @JsonKey(name: "minimum_percentage") required this.minimumPercentage,
+      @JsonKey(name: "job_location") required this.jobLocation,
+      @JsonKey(name: "website_url") required this.websiteURL,
       required final Map<String, int> data})
       : _id = id,
         _managementId = managementId,
@@ -324,6 +336,7 @@ class _$JobImpl extends _Job {
 
   final List<int> _managementId;
   @override
+  @JsonKey(name: "management_id")
   List<int> get managementId {
     if (_managementId is EqualUnmodifiableListView) return _managementId;
     // ignore: implicit_dynamic_type
@@ -332,6 +345,7 @@ class _$JobImpl extends _Job {
 
   final List<int> _branchId;
   @override
+  @JsonKey(name: "branch_id")
   List<int> get branchId {
     if (_branchId is EqualUnmodifiableListView) return _branchId;
     // ignore: implicit_dynamic_type
@@ -347,26 +361,36 @@ class _$JobImpl extends _Job {
   }
 
   @override
+  @JsonKey(name: "company_name")
   final String companyName;
   @override
+  @JsonKey(name: "end_date")
   final String endDate;
   @override
+  @JsonKey(name: "exp_ctc")
   final String expCTC;
   @override
   final String file;
   @override
+  @JsonKey(name: "job_description")
   final String jobDescription;
   @override
+  @JsonKey(name: "job_profile")
   final String jobProfile;
   @override
+  @JsonKey(name: "reg_link")
   final String regLink;
   @override
+  @JsonKey(name: "start_date")
   final String startDate;
   @override
+  @JsonKey(name: "minimum_percentage")
   final String minimumPercentage;
   @override
+  @JsonKey(name: "job_location")
   final String jobLocation;
   @override
+  @JsonKey(name: "website_url")
   final String websiteURL;
   final Map<String, int> _data;
   @override
@@ -450,20 +474,21 @@ class _$JobImpl extends _Job {
 abstract class _Job extends Job {
   const factory _Job(
       {required final List<int> id,
-      required final List<int> managementId,
-      required final List<int> branchId,
+      @JsonKey(name: "management_id") required final List<int> managementId,
+      @JsonKey(name: "branch_id") required final List<int> branchId,
       required final List<String> branches,
-      required final String companyName,
-      required final String endDate,
-      required final String expCTC,
+      @JsonKey(name: "company_name") required final String companyName,
+      @JsonKey(name: "end_date") required final String endDate,
+      @JsonKey(name: "exp_ctc") required final String expCTC,
       required final String file,
-      required final String jobDescription,
-      required final String jobProfile,
-      required final String regLink,
-      required final String startDate,
+      @JsonKey(name: "job_description") required final String jobDescription,
+      @JsonKey(name: "job_profile") required final String jobProfile,
+      @JsonKey(name: "reg_link") required final String regLink,
+      @JsonKey(name: "start_date") required final String startDate,
+      @JsonKey(name: "minimum_percentage")
       required final String minimumPercentage,
-      required final String jobLocation,
-      required final String websiteURL,
+      @JsonKey(name: "job_location") required final String jobLocation,
+      @JsonKey(name: "website_url") required final String websiteURL,
       required final Map<String, int> data}) = _$JobImpl;
   const _Job._() : super._();
 
@@ -472,32 +497,44 @@ abstract class _Job extends Job {
   @override
   List<int> get id;
   @override
+  @JsonKey(name: "management_id")
   List<int> get managementId;
   @override
+  @JsonKey(name: "branch_id")
   List<int> get branchId;
   @override
   List<String> get branches;
   @override
+  @JsonKey(name: "company_name")
   String get companyName;
   @override
+  @JsonKey(name: "end_date")
   String get endDate;
   @override
+  @JsonKey(name: "exp_ctc")
   String get expCTC;
   @override
   String get file;
   @override
+  @JsonKey(name: "job_description")
   String get jobDescription;
   @override
+  @JsonKey(name: "job_profile")
   String get jobProfile;
   @override
+  @JsonKey(name: "reg_link")
   String get regLink;
   @override
+  @JsonKey(name: "start_date")
   String get startDate;
   @override
+  @JsonKey(name: "minimum_percentage")
   String get minimumPercentage;
   @override
+  @JsonKey(name: "job_location")
   String get jobLocation;
   @override
+  @JsonKey(name: "website_url")
   String get websiteURL;
   @override
   Map<String, int> get data;
