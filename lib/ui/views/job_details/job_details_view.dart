@@ -1,5 +1,6 @@
 import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
+import 'package:ccpd_app_stacked/ui/widgets/common/job_details_stat_card/job_details_stat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -24,8 +25,8 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: viewModel.job == null
-            ? Center(
-                child: const SizedBox(
+            ? const Center(
+                child: SizedBox(
                     height: 50,
                     width: 50,
                     child: LoadingIndicator(
@@ -123,36 +124,45 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                         // First row
                         Row(
                           children: [
-                            JobDetailsCell(
+                            JobDetailsStatCard(
                               upperHeading:
                                   "Registered Students(${viewModel.job!.data['registered']})",
                               lowerHeading:
                                   viewModel.getRegisteredStudentsPercentage(
                                       job: viewModel.job!),
                               jobId: viewModel.job!.id[0].toString(),
+                              companyName: viewModel.job!.companyName,
+                              cardType: "registered",
                             ),
-                            JobDetailsCell(
+                            JobDetailsStatCard(
                               upperHeading:
                                   "Un-Registered Students(${viewModel.job!.data['unregistered']})",
                               jobId: viewModel.job!.id[0].toString(),
+                              companyName: viewModel.job!.companyName,
+                              cardType: "unregistered",
                               lowerHeading:
                                   viewModel.getUnregisteredStudentsPercentage(
-                                      job: viewModel.job!),
+                                job: viewModel.job!,
+                              ),
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            JobDetailsCell(
+                            JobDetailsStatCard(
                               upperHeading:
                                   "Eligible Students(${viewModel.job!.data['total']})",
                               lowerHeading: "50%",
+                              companyName: viewModel.job!.companyName,
                               jobId: viewModel.job!.id[0].toString(),
+                              cardType: "all",
                             ),
-                            JobDetailsCell(
+                            JobDetailsStatCard(
                               upperHeading: "Notify All",
                               lowerHeading: "100%",
+                              companyName: viewModel.job!.companyName,
                               jobId: viewModel.job!.id[0].toString(),
+                              cardType: "Notify",
                             ),
                           ],
                         ),
@@ -276,130 +286,6 @@ class JobDetailsPageButton extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Center(
             child: Text(title, style: TextStyle(color: titleColor)),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class JobDetailsCell extends StatelessWidget {
-  final String upperHeading, lowerHeading;
-  final String jobId;
-  final GlobalKey iconKey = GlobalKey();
-  JobDetailsCell({
-    super.key,
-    required this.upperHeading,
-    required this.lowerHeading,
-    required this.jobId,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        height: 110,
-        width: MediaQuery.of(context).size.width * 0.40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color(0xffeef2ff),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(upperHeading,
-                        style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold)),
-                  ),
-                  IconButton(
-                    key: iconKey,
-                    icon: Icon(Icons.more_vert),
-                    onPressed: () {
-                      final RenderBox? renderBox = iconKey.currentContext
-                          ?.findRenderObject() as RenderBox?;
-                      if (renderBox != null) {
-                        final position = renderBox.localToGlobal(Offset.zero);
-                        final size = renderBox.size;
-
-                        showMenu(
-                          context: context,
-                          position: RelativeRect.fromLTRB(
-                            position.dx,
-                            position.dy + size.height,
-                            position.dx,
-                            position.dy,
-                          ),
-                          items: <PopupMenuEntry>[
-                            // PopupMenuItem(
-                            //   value: 1,
-                            //   child: Row(
-                            //     children: [
-                            //       Icon(Icons.download_outlined),
-                            //       horizontalSpaceSmall,
-                            //       Text("Download"),
-                            //     ],
-                            //   ),
-                            // ),
-                            PopupMenuItem(
-                              onTap: () async {
-                                final _csvDataService =
-                                    CSVDataHandlingService();
-                                await _csvDataService.shareCSV(jobId: jobId);
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.share_outlined),
-                                  horizontalSpaceSmall,
-                                  Text("Share Data"),
-                                ],
-                              ),
-                              value: 2,
-                            ),
-                            PopupMenuItem(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  Icon(Icons.notifications_outlined),
-                                  horizontalSpaceSmall,
-                                  Text("Notify"),
-                                ],
-                              ),
-                              value: 2,
-                            ),
-                          ],
-                        );
-                      }
-                    },
-                  )
-                  // IconButton(
-                  //     onPressed: () {
-                  //       showMenu(
-                  //           context: context,
-                  //           position:
-                  //               const RelativeRect.fromLTRB(100, 100, 100, 100),
-                  //           items: const <PopupMenuEntry>[
-                  //             PopupMenuItem(
-                  //                 value: 1,
-                  //                 child: Text("Notify All")),
-                  //             PopupMenuItem(
-                  //                 child: Text("Notify Selected"), value: 2)
-                  //           ]);
-                  //     },
-                  //     icon: const Icon(Icons.more_vert))
-                ],
-              ),
-              verticalSpaceMedium,
-              Text(
-                lowerHeading,
-                style: const TextStyle(fontSize: 12, color: Colors.blue),
-              )
-            ],
           ),
         ),
       ),

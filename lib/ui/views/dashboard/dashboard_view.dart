@@ -160,7 +160,14 @@ class DashboardView extends StackedView<DashboardViewModel> {
               const Divider(),
               verticalSpaceSmall,
               if (viewModel.jobs == null)
-                const Center(child: CircularProgressIndicator())
+                const Center(
+                    child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: LoadingIndicator(
+                    indicatorType: Indicator.lineScale,
+                  ),
+                ))
               else if (viewModel.jobs!.isEmpty)
                 const Center(child: Text("No jobs found"))
               else

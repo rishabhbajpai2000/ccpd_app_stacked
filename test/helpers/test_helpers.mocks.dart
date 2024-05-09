@@ -1003,4 +1003,14 @@ class MockCSVDataHandlingService extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  dynamic downloadCSV({required String? jobId}) => super.noSuchMethod(
+        Invocation.method(
+          #downloadCSV,
+          [],
+          {#jobId: jobId},
+        ),
+        returnValueForMissingStub: null,
+      );
 }

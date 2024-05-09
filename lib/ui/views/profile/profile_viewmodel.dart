@@ -1,6 +1,7 @@
 import 'package:ccpd_app_stacked/app/app.locator.dart';
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
+import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
 import 'package:csv/csv.dart';
@@ -24,12 +25,8 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   void parseCSV() async {
-    final apiCallsServide = APICallsService();
-    final _logger = getLogger("ProfileViewModel");
-    final csv = await apiCallsServide.parseCSV();
-    List<List<dynamic>> rowsAsListOfValues =
-        const CsvToListConverter().convert(csv);
-
-    _logger.i(rowsAsListOfValues);
+    final _csvDataHandlingService = locator<CSVDataHandlingService>();
+    _csvDataHandlingService.shareCSV(
+        jobId: "558", dataType: "registered", companyName: "Test Company");
   }
 }
