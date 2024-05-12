@@ -1,5 +1,6 @@
 import 'package:ccpd_app_stacked/app/app.locator.dart';
 import 'package:ccpd_app_stacked/app/app.logger.dart';
+import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
 import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
@@ -8,6 +9,15 @@ import 'package:csv/csv.dart';
 import 'package:stacked/stacked.dart';
 
 class ProfileViewModel extends BaseViewModel {
+  List<JobOnDashboard>? jobs = [
+    JobOnDashboard(
+        companyName: "TCS",
+        driveDate: "23/12/2001",
+        registered: 10,
+        pending: 10,
+        id: [1],
+        postedBy: "Rishabh")
+  ];
   void logOut() {
     final loginService = locator<LoginService>();
     loginService.logout();
@@ -22,11 +32,5 @@ class ProfileViewModel extends BaseViewModel {
       type: "test",
       data: {"jobId": "558", "route": "job-details"},
     );
-  }
-
-  void parseCSV() async {
-    // final _csvDataHandlingService = locator<CSVDataHandlingService>();
-    // _csvDataHandlingService.shareCSV(
-    //     jobId: "558", dataType: "registered", companyName: "Test Company");
   }
 }

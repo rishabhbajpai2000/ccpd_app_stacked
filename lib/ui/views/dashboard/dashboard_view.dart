@@ -138,31 +138,25 @@ class DashboardView extends StackedView<DashboardViewModel> {
               const Row(
                 children: [
                   TableCell(
-                    value: "Company  ",
+                    value: "Company",
                     bold: true,
+                    width: 0.2,
                   ),
                   TableCell(
                     value: "Date",
                     bold: true,
-                    width: 0.1,
-                    center: true,
                   ),
                   TableCell(
                     value: "Registered",
                     bold: true,
-                    center: true,
-                    width: 0.20,
                   ),
                   TableCell(
                     value: "Pending",
                     bold: true,
-                    // center: true,
                   ),
                   TableCell(
                     value: "Posted By",
                     bold: true,
-                    center: true,
-                    width: 0.2,
                   ),
                 ],
               ),
@@ -215,7 +209,11 @@ class JobRow extends StatelessWidget {
   const JobRow({
     super.key,
     required this.job,
+    this.showPending = true,
+    this.showRegistered = true,
   });
+  final bool showRegistered;
+  final bool showPending;
 
   final JobOnDashboard job;
   String getDateDDMM(String date) {
@@ -246,24 +244,23 @@ class JobRow extends StatelessWidget {
                   value: job.companyName,
                   bold: true,
                   size: 16,
+                  width: 0.2,
                 ),
                 TableCell(
                   value: getDateDDMM(job.driveDate),
-                  width: 0.1,
                 ),
-                TableCell(
-                  value: job.registered.toString(),
-                  center: true,
-                  width: 0.2,
-                ),
-                TableCell(
-                  value: job.pending.toString(),
-                  center: true,
-                ),
+                showRegistered
+                    ? TableCell(
+                        value: job.registered.toString(),
+                      )
+                    : const SizedBox(),
+                showPending
+                    ? TableCell(
+                        value: job.pending.toString(),
+                      )
+                    : const SizedBox(),
                 TableCell(
                   value: job.postedBy,
-                  center: true,
-                  width: 0.2,
                 ),
               ],
             ),
