@@ -23,7 +23,7 @@ class DashboardView extends StackedView<DashboardViewModel> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: ListView(
             children: [
               verticalSpaceSmall,
@@ -138,22 +138,31 @@ class DashboardView extends StackedView<DashboardViewModel> {
               const Row(
                 children: [
                   TableCell(
-                    value: "Company",
+                    value: "Company  ",
                     bold: true,
                   ),
                   TableCell(
-                    value: "Drive Date",
+                    value: "Date",
                     bold: true,
+                    width: 0.1,
+                    center: true,
                   ),
                   TableCell(
                     value: "Registered",
                     bold: true,
                     center: true,
+                    width: 0.20,
                   ),
                   TableCell(
                     value: "Pending",
                     bold: true,
+                    // center: true,
+                  ),
+                  TableCell(
+                    value: "Posted By",
+                    bold: true,
                     center: true,
+                    width: 0.2,
                   ),
                 ],
               ),
@@ -209,6 +218,10 @@ class JobRow extends StatelessWidget {
   });
 
   final JobOnDashboard job;
+  String getDateDDMM(String date) {
+    List<String> dateParts = date.split("/");
+    return "${dateParts[0]}/${dateParts[1]}";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -235,15 +248,22 @@ class JobRow extends StatelessWidget {
                   size: 16,
                 ),
                 TableCell(
-                  value: job.driveDate,
+                  value: getDateDDMM(job.driveDate),
+                  width: 0.1,
                 ),
                 TableCell(
                   value: job.registered.toString(),
                   center: true,
+                  width: 0.2,
                 ),
                 TableCell(
                   value: job.pending.toString(),
                   center: true,
+                ),
+                TableCell(
+                  value: job.postedBy,
+                  center: true,
+                  width: 0.2,
                 ),
               ],
             ),
@@ -259,19 +279,20 @@ class TableCell extends StatelessWidget {
   final bool bold;
   final double size;
   final bool center;
-
+  final double width;
   const TableCell({
     super.key,
     required this.value,
     this.bold = false,
     this.size = 13,
     this.center = false,
+    this.width = 0.15,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.2,
+      width: MediaQuery.of(context).size.width * width,
       child: Text(
         value,
         style: TextStyle(
@@ -328,7 +349,7 @@ class DashboardCell extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 90,
-        width: MediaQuery.of(context).size.width * 0.35,
+        width: MediaQuery.of(context).size.width * 0.4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey, width: 1),

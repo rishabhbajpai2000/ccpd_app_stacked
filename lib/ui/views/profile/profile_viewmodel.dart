@@ -25,8 +25,8 @@ class ProfileViewModel extends BaseViewModel {
   }
 
   void parseCSV() async {
-    final _csvDataHandlingService = locator<CSVDataHandlingService>();
-    _csvDataHandlingService.shareCSV(
-        jobId: "558", dataType: "registered", companyName: "Test Company");
+    // final _csvDataHandlingService = locator<CSVDataHandlingService>();
+    // _csvDataHandlingService.shareCSV(
+    //     jobId: "558", dataType: "registered", companyName: "Test Company");
   }
 }

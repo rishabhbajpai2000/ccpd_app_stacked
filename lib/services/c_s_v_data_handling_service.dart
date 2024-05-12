@@ -1,7 +1,7 @@
 import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
-import 'package:csv/csv.dart';
+import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -14,14 +14,17 @@ class CSVDataHandlingService {
 
   shareCSV(
       {required String jobId,
-      required String dataType,
-      required String companyName}) async {
-    final apiLink = "$downloadDataAPILink/$dataType?id=$jobId";
+      required String companyName,
+      required DetailsType detailsType}) async {
+    final apiLink =
+        "$downloadDataAPILink/${detailsType.toString().split(".").last}?id=$jobId";
+    _logger.i(apiLink);
     final csv = await apiCallsService.fetchCSVData(apiLink: apiLink);
 
     // Write the CSV data to a file
     final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$companyName - $dataType.csv');
+    final file = File(
+        '${directory.path}/$companyName - ${detailsType.toString().split(".").last}.csv');
     await file.writeAsString(csv);
 
     // Share the file

@@ -24,7 +24,7 @@ mixin _$Student {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get rollNumber => throw _privateConstructorUsedError;
-  String get sgpa => throw _privateConstructorUsedError;
+  String? get sgpa => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ abstract class $StudentCopyWith<$Res> {
       String firstName,
       String lastName,
       String rollNumber,
-      String sgpa});
+      String? sgpa});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
     Object? firstName = null,
     Object? lastName = null,
     Object? rollNumber = null,
-    Object? sgpa = null,
+    Object? sgpa = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -80,10 +80,10 @@ class _$StudentCopyWithImpl<$Res, $Val extends Student>
           ? _value.rollNumber
           : rollNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      sgpa: null == sgpa
+      sgpa: freezed == sgpa
           ? _value.sgpa
           : sgpa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -100,7 +100,7 @@ abstract class _$$StudentImplCopyWith<$Res> implements $StudentCopyWith<$Res> {
       String firstName,
       String lastName,
       String rollNumber,
-      String sgpa});
+      String? sgpa});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$$StudentImplCopyWithImpl<$Res>
     Object? firstName = null,
     Object? lastName = null,
     Object? rollNumber = null,
-    Object? sgpa = null,
+    Object? sgpa = freezed,
   }) {
     return _then(_$StudentImpl(
       userId: null == userId
@@ -137,10 +137,10 @@ class __$$StudentImplCopyWithImpl<$Res>
           ? _value.rollNumber
           : rollNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      sgpa: null == sgpa
+      sgpa: freezed == sgpa
           ? _value.sgpa
           : sgpa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -168,7 +168,7 @@ class _$StudentImpl extends _Student {
   @override
   final String rollNumber;
   @override
-  final String sgpa;
+  final String? sgpa;
 
   @override
   String toString() {
@@ -215,7 +215,7 @@ abstract class _Student extends Student {
       required final String firstName,
       required final String lastName,
       required final String rollNumber,
-      required final String sgpa}) = _$StudentImpl;
+      required final String? sgpa}) = _$StudentImpl;
   const _Student._() : super._();
 
   factory _Student.fromJson(Map<String, dynamic> json) = _$StudentImpl.fromJson;
@@ -229,7 +229,7 @@ abstract class _Student extends Student {
   @override
   String get rollNumber;
   @override
-  String get sgpa;
+  String? get sgpa;
   @override
   @JsonKey(ignore: true)
   _$$StudentImplCopyWith<_$StudentImpl> get copyWith =>

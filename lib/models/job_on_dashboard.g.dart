@@ -13,6 +13,7 @@ _$JobOnDashboardImpl _$$JobOnDashboardImplFromJson(Map<String, dynamic> json) =>
       registered: json['registered'] as int,
       pending: json['pending'] as int,
       id: (json['id'] as List<dynamic>).map((e) => e as int).toList(),
+      postedBy: json['postedBy'] as String,
     );
 
 Map<String, dynamic> _$$JobOnDashboardImplToJson(
@@ -23,4 +24,5 @@ Map<String, dynamic> _$$JobOnDashboardImplToJson(
       'registered': instance.registered,
       'pending': instance.pending,
       'id': instance.id,
+      'postedBy': instance.postedBy,
     };

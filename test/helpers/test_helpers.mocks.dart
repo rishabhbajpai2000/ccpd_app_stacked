@@ -8,12 +8,15 @@ import 'dart:ui' as _i10;
 
 import 'package:ccpd_app_stacked/models/Job.dart' as _i4;
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart' as _i13;
+import 'package:ccpd_app_stacked/models/student.dart' as _i14;
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart' as _i5;
 import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart'
-    as _i16;
+    as _i18;
 import 'package:ccpd_app_stacked/services/login_service.dart' as _i11;
-import 'package:ccpd_app_stacked/services/notification_service.dart' as _i15;
-import 'package:ccpd_app_stacked/services/utils_service.dart' as _i14;
+import 'package:ccpd_app_stacked/services/notification_service.dart' as _i17;
+import 'package:ccpd_app_stacked/services/utils_service.dart' as _i16;
+import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart'
+    as _i15;
 import 'package:file_picker/file_picker.dart' as _i12;
 import 'package:flutter/material.dart' as _i8;
 import 'package:logger/src/logger.dart' as _i3;
@@ -963,18 +966,36 @@ class MockAPICallsService extends _i1.Mock implements _i5.APICallsService {
           ),
         )),
       ) as _i9.Future<_i4.Job>);
+
+  @override
+  _i9.Future<List<_i14.Student>> getStudents(
+    _i4.Job? job,
+    _i15.DetailsType? detailsType,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStudents,
+          [
+            job,
+            detailsType,
+          ],
+        ),
+        returnValue: _i9.Future<List<_i14.Student>>.value(<_i14.Student>[]),
+        returnValueForMissingStub:
+            _i9.Future<List<_i14.Student>>.value(<_i14.Student>[]),
+      ) as _i9.Future<List<_i14.Student>>);
 }
 
 /// A class which mocks [UtilsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUtilsService extends _i1.Mock implements _i14.UtilsService {}
+class MockUtilsService extends _i1.Mock implements _i16.UtilsService {}
 
 /// A class which mocks [NotificationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationService extends _i1.Mock
-    implements _i15.NotificationService {
+    implements _i17.NotificationService {
   @override
   _i9.Future<void> initOneSignal() => (super.noSuchMethod(
         Invocation.method(
@@ -1014,7 +1035,7 @@ class MockNotificationService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCSVDataHandlingService extends _i1.Mock
-    implements _i16.CSVDataHandlingService {
+    implements _i18.CSVDataHandlingService {
   @override
   _i5.APICallsService get apiCallsService => (super.noSuchMethod(
         Invocation.getter(#apiCallsService),
@@ -1031,8 +1052,8 @@ class MockCSVDataHandlingService extends _i1.Mock
   @override
   dynamic shareCSV({
     required String? jobId,
-    required String? dataType,
     required String? companyName,
+    required _i15.DetailsType? detailsType,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1040,8 +1061,8 @@ class MockCSVDataHandlingService extends _i1.Mock
           [],
           {
             #jobId: jobId,
-            #dataType: dataType,
             #companyName: companyName,
+            #detailsType: detailsType,
           },
         ),
         returnValueForMissingStub: null,

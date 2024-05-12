@@ -11,7 +11,7 @@ class Student with _$Student {
     required String firstName,
     required String lastName,
     required String rollNumber,
-    required String sgpa,
+    required String? sgpa,
   }) = _Student;
 
   factory Student.fromJson(Map<String, dynamic> json) =>

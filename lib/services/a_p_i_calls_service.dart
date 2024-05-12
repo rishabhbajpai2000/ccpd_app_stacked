@@ -5,7 +5,9 @@ import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
 import 'package:ccpd_app_stacked/models/Job.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
+import 'package:ccpd_app_stacked/models/student.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
+import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
 import 'package:file_picker/file_picker.dart';
 import "package:http/http.dart" as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -127,5 +129,26 @@ class APICallsService {
       return Job.fromJson(data);
     }
     throw Exception("Failed to load the job details");
+  }
+
+  /// this will return the list of students based on the job and the details type
+  Future<List<Student>> getStudents(Job job, DetailsType detailsType) async {
+    List<Student> students = [];
+    String api =
+        "$studentDetailsAPI/${detailsType.toString().split('.').last}?jobId=${job.id[0]}";
+    _logger.i(api);
+    final response = await http.get(Uri.parse(api));
+    if (response.statusCode == 200) {
+      try {
+        List<dynamic> data = jsonDecode(response.body);
+        for (var student in data) {
+          students.add(Student.fromJson(student));
+        }
+      } catch (e) {
+        _logger.e(e);
+      }
+    }
+
+    return students;
   }
 }

@@ -14,7 +14,7 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
   final String jobId;
   final String companyName;
   final GlobalKey iconKey = GlobalKey();
-  final String cardType;
+
   final Job job;
   final DetailsType detailsType;
 
@@ -23,7 +23,6 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
       required this.upperHeading,
       required this.lowerHeading,
       required this.jobId,
-      required this.cardType,
       required this.companyName,
       required this.job,
       required this.detailsType});
@@ -38,7 +37,7 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
         onTap: () {
-          if (cardType == "Notify") {
+          if (detailsType == DetailsType.notifyAll) {
             return;
           }
           NavigationService()
@@ -63,7 +62,7 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
                           style: const TextStyle(
                               fontSize: 12, fontWeight: FontWeight.bold)),
                     ),
-                    cardType != "Notify"
+                    detailsType != DetailsType.notifyAll
                         ? IconButton(
                             key: iconKey,
                             icon: const Icon(Icons.more_vert),
@@ -106,35 +105,37 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
                                             CSVDataHandlingService();
                                         await csvDataService.shareCSV(
                                             jobId: jobId,
-                                            dataType: cardType,
+                                            detailsType: detailsType,
                                             companyName: companyName);
                                       },
-                                      child: Row(
+                                      value: 2,
+                                      child: const Row(
                                         children: [
                                           Icon(Icons.share_outlined),
                                           horizontalSpaceSmall,
                                           Text("Share Data"),
                                         ],
                                       ),
-                                      value: 2,
                                     ),
                                     PopupMenuItem(
-                                      onTap: () {},
-                                      child: Row(
+                                      onTap: () {
+                                        // TODO: Implement notifyAll
+                                      },
+                                      value: 2,
+                                      child: const Row(
                                         children: [
                                           Icon(Icons.notifications_outlined),
                                           horizontalSpaceSmall,
                                           Text("Notify"),
                                         ],
                                       ),
-                                      value: 2,
                                     ),
                                   ],
                                 );
                               }
                             },
                           )
-                        : SizedBox()
+                        : const SizedBox()
                   ],
                 ),
                 verticalSpaceMedium,

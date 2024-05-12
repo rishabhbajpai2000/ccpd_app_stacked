@@ -12,7 +12,7 @@ _$StudentImpl _$$StudentImplFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       rollNumber: json['rollNumber'] as String,
-      sgpa: json['sgpa'] as String,
+      sgpa: json['sgpa'] as String?,
     );
 
 Map<String, dynamic> _$$StudentImplToJson(_$StudentImpl instance) =>
