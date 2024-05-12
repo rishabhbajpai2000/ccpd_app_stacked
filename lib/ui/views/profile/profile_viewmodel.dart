@@ -8,6 +8,8 @@ import 'package:ccpd_app_stacked/services/notification_service.dart';
 import 'package:csv/csv.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../models/profile_data.dart';
+
 class ProfileViewModel extends BaseViewModel {
   List<JobOnDashboard>? jobs = [
     JobOnDashboard(
@@ -18,6 +20,7 @@ class ProfileViewModel extends BaseViewModel {
         id: [1],
         postedBy: "Rishabh")
   ];
+  ProfileData? profileData;
   void logOut() {
     final loginService = locator<LoginService>();
     loginService.logout();
@@ -32,5 +35,11 @@ class ProfileViewModel extends BaseViewModel {
       type: "test",
       data: {"jobId": "558", "route": "job-details"},
     );
+  }
+
+  void init() async {
+    final APICallsService apiCallsService = locator<APICallsService>();
+    profileData = await apiCallsService.getProfileData();
+    rebuildUi();
   }
 }

@@ -5,6 +5,7 @@ import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
 import 'package:ccpd_app_stacked/models/Job.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
+import 'package:ccpd_app_stacked/models/profile_data.dart';
 import 'package:ccpd_app_stacked/models/student.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
@@ -150,5 +151,16 @@ class APICallsService {
     }
 
     return students;
+  }
+
+  Future<ProfileData?> getProfileData() async {
+    final api =
+        "$profileDataAPILink${Supabase.instance.client.auth.currentUser!.id}";
+    final response = await http.get(Uri.parse(api));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return ProfileData.fromJson(data);
+    }
+    return null;
   }
 }

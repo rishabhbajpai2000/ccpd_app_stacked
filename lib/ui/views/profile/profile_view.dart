@@ -39,21 +39,21 @@ class ProfileView extends StackedView<ProfileViewModel> {
             children: [
               ProfileRow(
                 heading: "First Name",
-                value: "Sanjeev",
+                value: viewModel.profileData?.firstName ?? "Loading",
               ),
               ProfileRow(
                 heading: "Last Name",
-                value: "Sirvastava",
+                value: viewModel.profileData?.lastName ?? "Loading",
               ),
               ProfileRow(
                 heading: "Email",
-                value: "sanjeev@gmail.com",
+                value: viewModel.profileData?.email ?? "Loading",
               ),
               Text("Jobs Posted",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               verticalSpaceSmall,
 
-              if (viewModel.jobs == null)
+              if (viewModel.profileData == null)
                 const Center(
                     child: SizedBox(
                   width: 50,
@@ -62,20 +62,18 @@ class ProfileView extends StackedView<ProfileViewModel> {
                     indicatorType: Indicator.lineScale,
                   ),
                 ))
-              else if (viewModel.jobs!.isEmpty)
+              else if (viewModel.profileData!.companyName.isEmpty)
                 const Center(child: Text("No jobs found"))
               else
                 SizedBox(
-                  height: 50 * viewModel.jobs!.length.toDouble(),
+                  height:
+                      50 * viewModel.profileData!.companyName.length.toDouble(),
                   child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: viewModel.jobs!.length,
                       itemBuilder: (context, index) {
-                        JobOnDashboard job = viewModel.jobs![index];
-                        return JobRow(
-                          job: job,
-                          showPending: false,
-                          showRegistered: false,
+                        return ListTile(
+                          title: Text(viewModel.profileData!.companyName[index]),
                         );
                       }),
                 ),
@@ -99,6 +97,11 @@ class ProfileView extends StackedView<ProfileViewModel> {
     BuildContext context,
   ) =>
       ProfileViewModel();
+
+  @override
+  void onViewModelReady(ProfileViewModel viewModel) {
+    viewModel.init();
+  }
 }
 
 class ProfileRow extends StatelessWidget {
