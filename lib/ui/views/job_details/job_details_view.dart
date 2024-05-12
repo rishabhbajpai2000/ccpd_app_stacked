@@ -1,5 +1,5 @@
-import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
+import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
 import 'package:ccpd_app_stacked/ui/widgets/common/job_details_stat_card/job_details_stat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -133,8 +133,11 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               jobId: viewModel.job!.id[0].toString(),
                               companyName: viewModel.job!.companyName,
                               cardType: "registered",
+                              job: viewModel.job!,
+                              detailsType: DetailsType.registered,
                             ),
                             JobDetailsStatCard(
+                              detailsType: DetailsType.unregistered,
                               upperHeading:
                                   "Un-Registered Students(${viewModel.job!.data['unregistered']})",
                               jobId: viewModel.job!.id[0].toString(),
@@ -144,6 +147,7 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                                   viewModel.getUnregisteredStudentsPercentage(
                                 job: viewModel.job!,
                               ),
+                              job: viewModel.job!,
                             ),
                           ],
                         ),
@@ -156,6 +160,8 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               companyName: viewModel.job!.companyName,
                               jobId: viewModel.job!.id[0].toString(),
                               cardType: "all",
+                              job: viewModel.job!,
+                              detailsType: DetailsType.eligible,
                             ),
                             JobDetailsStatCard(
                               upperHeading: "Notify All",
@@ -163,6 +169,8 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                               companyName: viewModel.job!.companyName,
                               jobId: viewModel.job!.id[0].toString(),
                               cardType: "Notify",
+                              job: viewModel.job!,
+                              detailsType: DetailsType.eligible,
                             ),
                           ],
                         ),
