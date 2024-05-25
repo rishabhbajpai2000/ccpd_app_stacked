@@ -10,9 +10,9 @@ class JobOnDashboard with _$JobOnDashboard {
       required String driveDate,
       required int registered,
       required int pending,
-      required List<int> id, 
+      required List<int> id,
       required String postedBy}) = _JobOnDashboard;
-      
+
   factory JobOnDashboard.fromJson(Map<String, dynamic> json) =>
       _$JobOnDashboardFromJson(json);
   @override

@@ -17,6 +17,7 @@ import 'package:ccpd_app_stacked/services/notification_service.dart';
 import 'package:ccpd_app_stacked/ui/views/job_details/job_details_view.dart';
 import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
+import 'package:ccpd_app_stacked/ui/views/add_placed_students/add_placed_students_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -32,6 +33,7 @@ import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart'
     MaterialRoute(page: JobPostingView),
     MaterialRoute(page: JobDetailsView),
     MaterialRoute(page: StudentsListView),
+    MaterialRoute(page: AddPlacedStudentsView),
 // @stacked-route
   ],
   dependencies: [

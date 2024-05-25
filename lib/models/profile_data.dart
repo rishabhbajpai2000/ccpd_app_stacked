@@ -7,10 +7,10 @@ part 'profile_data.freezed.dart';
 class ProfileData with _$ProfileData {
   const ProfileData._();
   const factory ProfileData({
-   @JsonKey(name: "first_name") required String firstName,
+    @JsonKey(name: "first_name") required String firstName,
     @JsonKey(name: "last_name") required String lastName,
     required String email,
-   @JsonKey(name: "company_name")  required List<String> companyName,
+    @JsonKey(name: "company_name") required List<String> companyName,
   }) = _ProfileData;
 
   factory ProfileData.fromJson(Map<String, dynamic> json) =>

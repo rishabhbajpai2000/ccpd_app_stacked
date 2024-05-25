@@ -73,7 +73,8 @@ class ProfileView extends StackedView<ProfileViewModel> {
                       itemCount: viewModel.jobs!.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(viewModel.profileData!.companyName[index]),
+                          title:
+                              Text(viewModel.profileData!.companyName[index]),
                         );
                       }),
                 ),

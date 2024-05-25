@@ -5,7 +5,9 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:ccpd_app_stacked/models/Job.dart' as _i13;
+import 'package:ccpd_app_stacked/models/Job.dart' as _i14;
+import 'package:ccpd_app_stacked/ui/views/add_placed_students/add_placed_students_view.dart'
+    as _i12;
 import 'package:ccpd_app_stacked/ui/views/dashboard/dashboard_view.dart' as _i7;
 import 'package:ccpd_app_stacked/ui/views/home/home_view.dart' as _i2;
 import 'package:ccpd_app_stacked/ui/views/initial_welcome_screen/initial_welcome_screen_view.dart'
@@ -20,10 +22,10 @@ import 'package:ccpd_app_stacked/ui/views/sign_up/sign_up_view.dart' as _i6;
 import 'package:ccpd_app_stacked/ui/views/startup/startup_view.dart' as _i3;
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart'
     as _i11;
-import 'package:flutter/material.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i14;
+import 'package:stacked_services/stacked_services.dart' as _i15;
 
 class Routes {
   static const homeView = '/home-view';
@@ -46,6 +48,8 @@ class Routes {
 
   static const studentsListView = '/students-list-view';
 
+  static const addPlacedStudentsView = '/add-placed-students-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -57,6 +61,7 @@ class Routes {
     jobPostingView,
     jobDetailsView,
     studentsListView,
+    addPlacedStudentsView,
   };
 }
 
@@ -102,69 +107,81 @@ class StackedRouter extends _i1.RouterBase {
       Routes.studentsListView,
       page: _i11.StudentsListView,
     ),
+    _i1.RouteDef(
+      Routes.addPlacedStudentsView,
+      page: _i12.AddPlacedStudentsView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.InitialWelcomeScreenView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.InitialWelcomeScreenView(),
         settings: data,
       );
     },
     _i5.LoginView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.LoginView(),
         settings: data,
       );
     },
     _i6.SignUpView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SignUpView(),
         settings: data,
       );
     },
     _i7.DashboardView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.DashboardView(),
         settings: data,
       );
     },
     _i8.ProfileView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.ProfileView(),
         settings: data,
       );
     },
     _i9.JobPostingView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.JobPostingView(),
         settings: data,
       );
     },
     _i10.JobDetailsView: (data) {
       final args = data.getArgs<JobDetailsViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => _i10.JobDetailsView(key: args.key, ids: args.ids),
         settings: data,
       );
     },
     _i11.StudentsListView: (data) {
       final args = data.getArgs<StudentsListViewArguments>(nullOk: false);
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => _i11.StudentsListView(
             key: args.key, job: args.job, detailsType: args.detailsType),
+        settings: data,
+      );
+    },
+    _i12.AddPlacedStudentsView: (data) {
+      final args = data.getArgs<AddPlacedStudentsViewArguments>(nullOk: false);
+      return _i13.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i12.AddPlacedStudentsView(key: args.key, jobId: args.jobId),
         settings: data,
       );
     },
@@ -183,7 +200,7 @@ class JobDetailsViewArguments {
     required this.ids,
   });
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
   final List<int> ids;
 
@@ -211,9 +228,9 @@ class StudentsListViewArguments {
     required this.detailsType,
   });
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
-  final _i13.Job job;
+  final _i14.Job job;
 
   final _i11.DetailsType detailsType;
 
@@ -236,7 +253,34 @@ class StudentsListViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i14.NavigationService {
+class AddPlacedStudentsViewArguments {
+  const AddPlacedStudentsViewArguments({
+    this.key,
+    required this.jobId,
+  });
+
+  final _i13.Key? key;
+
+  final int jobId;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "jobId": "$jobId"}';
+  }
+
+  @override
+  bool operator ==(covariant AddPlacedStudentsViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.jobId == jobId;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ jobId.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i15.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -350,7 +394,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> navigateToJobDetailsView({
-    _i12.Key? key,
+    _i13.Key? key,
     required List<int> ids,
     int? routerId,
     bool preventDuplicates = true,
@@ -367,8 +411,8 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> navigateToStudentsListView({
-    _i12.Key? key,
-    required _i13.Job job,
+    _i13.Key? key,
+    required _i14.Job job,
     required _i11.DetailsType detailsType,
     int? routerId,
     bool preventDuplicates = true,
@@ -379,6 +423,23 @@ extension NavigatorStateExtension on _i14.NavigationService {
     return navigateTo<dynamic>(Routes.studentsListView,
         arguments: StudentsListViewArguments(
             key: key, job: job, detailsType: detailsType),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAddPlacedStudentsView({
+    _i13.Key? key,
+    required int jobId,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.addPlacedStudentsView,
+        arguments: AddPlacedStudentsViewArguments(key: key, jobId: jobId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -498,7 +559,7 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> replaceWithJobDetailsView({
-    _i12.Key? key,
+    _i13.Key? key,
     required List<int> ids,
     int? routerId,
     bool preventDuplicates = true,
@@ -515,8 +576,8 @@ extension NavigatorStateExtension on _i14.NavigationService {
   }
 
   Future<dynamic> replaceWithStudentsListView({
-    _i12.Key? key,
-    required _i13.Job job,
+    _i13.Key? key,
+    required _i14.Job job,
     required _i11.DetailsType detailsType,
     int? routerId,
     bool preventDuplicates = true,
@@ -527,6 +588,23 @@ extension NavigatorStateExtension on _i14.NavigationService {
     return replaceWith<dynamic>(Routes.studentsListView,
         arguments: StudentsListViewArguments(
             key: key, job: job, detailsType: detailsType),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAddPlacedStudentsView({
+    _i13.Key? key,
+    required int jobId,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.addPlacedStudentsView,
+        arguments: AddPlacedStudentsViewArguments(key: key, jobId: jobId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

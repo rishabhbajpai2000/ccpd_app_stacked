@@ -6,6 +6,7 @@ import 'package:ccpd_app_stacked/links/a_p_i_s.dart';
 import 'package:ccpd_app_stacked/models/Job.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/models/profile_data.dart';
+import 'package:ccpd_app_stacked/models/registered_student.dart';
 import 'package:ccpd_app_stacked/models/student.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
@@ -162,5 +163,39 @@ class APICallsService {
       return ProfileData.fromJson(data);
     }
     return null;
+  }
+
+  Future<List<RegisteredStudent>> getRegisteredStudents(
+      {required int jobId}) async {
+    List<RegisteredStudent> students = [];
+    final response = await http.get(Uri.parse("$registeredStudentsAPI$jobId"));
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body);
+      for (var student in data) {
+        students.add(RegisteredStudent.fromJson(student));
+      }
+    }
+    return students;
+  }
+
+  Future<bool> addPlacedStudents(
+      {required List<RegisteredStudent> selectedStudents}) async {
+    List<String> studentIds = [];
+    for (var student in selectedStudents) {
+      studentIds.add(student.userId);
+    }
+    Map<String, dynamic> body = {
+      "companyName": selectedStudents[0].companyName,
+      "id": studentIds
+    };
+    String data = jsonEncode(body);
+    final response = await http.post(Uri.parse(placedStudentsAPI),
+        headers: headers, body: data);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      _logger.e(response.statusCode);
+      return false;
+    }
   }
 }

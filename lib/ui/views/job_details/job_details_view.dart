@@ -1,3 +1,4 @@
+import 'package:ccpd_app_stacked/app/app.router.dart';
 import 'package:ccpd_app_stacked/ui/common/ui_helpers.dart';
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
 import 'package:ccpd_app_stacked/ui/widgets/common/job_details_stat_card/job_details_stat_card.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'job_details_viewmodel.dart';
 
 class JobDetailsView extends StackedView<JobDetailsViewModel> {
@@ -195,13 +197,25 @@ class JobDetailsView extends StackedView<JobDetailsViewModel> {
                           link: true,
                         ),
                         verticalSpaceMedium,
-                        Center(
-                          child: JobDetailsPageButton(
-                            title: "Back",
-                            titleColor: Colors.white,
-                            backgroundColor: const Color(0xff8e97fd),
-                            onTap: () => Navigator.pop(context),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            JobDetailsPageButton(
+                              title: "Back",
+                              titleColor: Colors.white,
+                              backgroundColor: const Color(0xff8e97fd),
+                              onTap: () => Navigator.pop(context),
+                            ),
+                            JobDetailsPageButton(
+                              title: " Add Placed Students",
+                              titleColor: Colors.black,
+                              backgroundColor: Colors.transparent,
+                              onTap: () => NavigationService()
+                                  .navigateToAddPlacedStudentsView(
+                                      jobId: viewModel.job!.id[0]),
+                              showBorder: true,
+                            ),
+                          ],
                         ),
                         verticalSpaceMedium,
                       ],
@@ -269,13 +283,14 @@ class JobDetailsPageButton extends StatelessWidget {
   final Color titleColor;
   final Color backgroundColor;
   final void Function()? onTap;
-  const JobDetailsPageButton({
-    super.key,
-    required this.title,
-    required this.titleColor,
-    required this.backgroundColor,
-    required this.onTap,
-  });
+  final bool showBorder;
+  const JobDetailsPageButton(
+      {super.key,
+      required this.title,
+      required this.titleColor,
+      required this.backgroundColor,
+      required this.onTap,
+      this.showBorder = false});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -285,11 +300,16 @@ class JobDetailsPageButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
+          border: showBorder ? Border.all(color: Colors.black, width: 1) : null,
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Center(
-            child: Text(title, style: TextStyle(color: titleColor)),
+            child: Text(
+              title,
+              style: TextStyle(color: titleColor),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ),
