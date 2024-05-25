@@ -62,7 +62,7 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
                           style: const TextStyle(
                               fontSize: 12, fontWeight: FontWeight.bold)),
                     ),
-                    detailsType != DetailsType.notifyAll
+                    detailsType != DetailsType.all
                         ? IconButton(
                             key: iconKey,
                             icon: const Icon(Icons.more_vert),
@@ -119,7 +119,11 @@ class JobDetailsStatCard extends StackedView<JobDetailsStatCardModel> {
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
-                                        // TODO: Implement notifyAll
+                                        // TODO: Implement notify
+                                        viewModel.notify(
+                                            detailsType: detailsType,
+                                            jobId: jobId,
+                                            job: job);
                                       },
                                       value: 2,
                                       child: const Row(

@@ -19,13 +19,12 @@ class NotificationService {
     required List<String> users,
     required String title,
     required String description,
-    required String type,
-    Map<String, dynamic>? data,
+   required Map<String, dynamic> data,
   }) async {
     Map<String, dynamic> body = {
       "app_id": "1be38fba-04b1-4b93-a3c6-7656329481f3",
       "include_aliases": {
-        "external_id": ["885e2ca7-f3e5-4b98-ae4d-d6ed4f55a166"]
+        "external_id": users
       },
       "headings": {"en": title},
       "target_channel": "push",

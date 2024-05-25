@@ -52,7 +52,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
               Text("Jobs Posted",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               verticalSpaceSmall,
-
               if (viewModel.profileData == null)
                 const Center(
                     child: SizedBox(
@@ -78,14 +77,14 @@ class ProfileView extends StackedView<ProfileViewModel> {
                         );
                       }),
                 ),
-              // GestureDetector(
-              //     onTap: () {
-              //       viewModel.sendNotification();
-              //     },
-              //     child: const Text(
-              //       "Send Notification",
-              //       style: TextStyle(fontSize: 40),
-              //     )),
+              GestureDetector(
+                  onTap: () {
+                    viewModel.sendNotification();
+                  },
+                  child: const Text(
+                    "Send Notification",
+                    style: TextStyle(fontSize: 40),
+                  )),
             ],
           ),
         ),

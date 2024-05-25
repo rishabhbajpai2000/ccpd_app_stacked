@@ -1,11 +1,8 @@
 import 'package:ccpd_app_stacked/app/app.locator.dart';
-import 'package:ccpd_app_stacked/app/app.logger.dart';
 import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/services/a_p_i_calls_service.dart';
-import 'package:ccpd_app_stacked/services/c_s_v_data_handling_service.dart';
 import 'package:ccpd_app_stacked/services/login_service.dart';
 import 'package:ccpd_app_stacked/services/notification_service.dart';
-import 'package:csv/csv.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../models/profile_data.dart';
@@ -32,7 +29,6 @@ class ProfileViewModel extends BaseViewModel {
       users: ["61b61c55-9458-4b97-adfd-0b33e3f625c4"],
       title: "New Job Posted - Please Apply Fast",
       description: "Job with ID 558 has been posted. Please apply fast.",
-      type: "test",
       data: {"jobId": "558", "route": "job-details"},
     );
   }

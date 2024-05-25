@@ -8,9 +8,11 @@ import 'package:ccpd_app_stacked/models/job_on_dashboard.dart';
 import 'package:ccpd_app_stacked/models/profile_data.dart';
 import 'package:ccpd_app_stacked/models/registered_student.dart';
 import 'package:ccpd_app_stacked/models/student.dart';
+import 'package:ccpd_app_stacked/services/notification_service.dart';
 import 'package:ccpd_app_stacked/services/utils_service.dart';
 import 'package:ccpd_app_stacked/ui/views/students_list/students_list_view.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import "package:http/http.dart" as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -62,6 +64,28 @@ class APICallsService {
         await http.post(Uri.parse(jobAPILink), headers: headers, body: data);
 
     int statusCode = response.statusCode;
+
+    // sending notification
+    try {
+      if (statusCode == 200) {
+        _logger.i("Job Posted Successfully");
+        final int jobId = jsonDecode(response.body)[0];
+        _logger.i(jobId);
+        final List<String> userIds = await getAllEligibleStudentsIds(jobId: jobId);
+        final NotificationService notificationService = NotificationService();
+        await notificationService.sendNotification(
+            users: userIds,
+            title: "New Job: $companyName",
+            description:
+                "Job in $companyName, with CTC $expectedCTC posted, please apply fast",
+            data: {"jobId": jobId.toString(), "route": "job-details"});
+        Fluttertoast.showToast(
+            msg:
+                "All the students have been successfully notified about the job posting");
+      }
+    } catch (e) {
+      _logger.e(e);
+    }
     _logger.i("statusCode: $statusCode");
     UtilsService.showRelevantToastMessageForJobPostingAPI(
         statusCode: statusCode);
@@ -197,5 +221,47 @@ class APICallsService {
       _logger.e(response.statusCode);
       return false;
     }
+  }
+
+  static Future<List<String>> getAllEligibleStudentsIds(
+      {required int jobId}) async {
+    List<String> userIds = [];
+    final response =
+        await http.get(Uri.parse("$allEligibleNotifyStudentsAPI$jobId"));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final users = data[0].split(",");
+      userIds = users;
+      _logger.i(users);
+    }
+    return userIds;
+  }
+
+  static Future<List<String>> getAllRegisteredStudentsIds(
+      {required int jobId}) async {
+    List<String> userIds = [];
+    final response =
+        await http.get(Uri.parse("$registeredNotifyStudentsAPI$jobId"));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final users = data[0].split(",");
+      userIds = users;
+      _logger.i(users);
+    }
+    return userIds;
+  }
+
+  static Future<List<String>> getAllUnRegisteredStudentsIds(
+      {required int jobId}) async {
+    List<String> userIds = [];
+    final response =
+        await http.get(Uri.parse("$unregisteredNotifyStudentsAPI$jobId"));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final users = data[0].split(",");
+      userIds = users;
+      _logger.i(users);
+    }
+    return userIds;
   }
 }

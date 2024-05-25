@@ -9,3 +9,10 @@ String registeredStudentsAPI =
     "https://campus-ease.onrender.com/jobs/placement/data?id=";
 String placedStudentsAPI =
     "https://campus-ease.onrender.com/jobs/students/placed";
+String allEligibleNotifyStudentsAPI =
+    'https://campus-ease.onrender.com/students/notify/all?jobId=';
+
+String registeredNotifyStudentsAPI =
+    'https://campus-ease.onrender.com/students/notify/registered?jobId=';
+String unregisteredNotifyStudentsAPI =
+    'https://campus-ease.onrender.com/students/notify/unregistered?jobId=';
